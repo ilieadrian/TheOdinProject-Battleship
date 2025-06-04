@@ -1,0 +1,57 @@
+/* General styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    overflow-y: scroll;
+    overflow-x: hidden; 
+}
+body {
+    min-height: 100vh;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F9FBFC;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+.button {
+    min-width: 190px;
+    font-size: 1rem;
+    font-weight: 400;
+    border: none;
+    background-color: rgb(62, 76, 117);
+    color: rgb(255, 255, 255);
+    padding: 0.75rem 1rem;
+    border-radius: 3px;
+}
+
+.button:hover {
+    border: none;
+    cursor: pointer;
+    background-color: rgba(62, 76, 117, 0.8);
+}
+
+/* Footer */
+.attribution {
+    text-align: center;
+    width: 100%;
+    padding-bottom: 0.3rem;
+    font-size: 0.7rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.attribution a {
+    margin-left: 0.3rem;
+}
