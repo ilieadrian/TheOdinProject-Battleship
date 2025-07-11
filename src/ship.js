@@ -1,9 +1,14 @@
-export default function Ship(length) {
-    let hits = 0;
+export default class Ship {
+    constructor(length) {
+        this.length = length;
+        this.hits = 0;
+    }
 
-    return {
-        length,
-        hit: () => hits++,
-        isSunk: () => hits >= length
-    };
+    hit() {
+        this.hits++;
+    }
+
+    isSunk() {
+        return this.hits >= this.length;
+    }
 }
