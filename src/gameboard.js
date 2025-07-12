@@ -1,14 +1,17 @@
 export default class Gameboard {
-    constructor(length) {
-        this.length = length;
-        this.hits = 0;
+    constructor(x, y) {
+        this.rows = x;
+        this.columns = y;
+        this.gameboard = this.generateBoard(this.rows, this.columns);
+        this.shipsCount = 0;
     }
 
-    hit() {
-        this.hits++;
+    generateBoard(r, c) {
+        const gameboard = Array.from({ length: r }, () =>
+            Array.from({ length: c }, () => null)
+        );
+        return gameboard;
     }
 
-    isSunk() {
-        return this.hits >= this.length;
-    }
+    
 }
