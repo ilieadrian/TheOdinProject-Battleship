@@ -20,6 +20,7 @@ test('placeShip should not allow placing a ship out of bounds', () => {
         myGameboard.placeShip(myShip, 0, 8, 'horizontal');
     }).toThrow('Ship placement out of bounds');
 });
+
 test('placeShip should not allow overlapping ships', () => {
     myGameboard = new Gameboard(10, 10);
     const myShip1 = new Ship(3);
@@ -28,4 +29,26 @@ test('placeShip should not allow overlapping ships', () => {
     expect(() => {
         myGameboard.placeShip(myShip2, 0, 1, 'horizontal');
     }).toThrow('Ships cannot overlap');
+});
+
+test('receiveAttack should hit a ship', () => {
+    const myShip = new Ship(3);
+    myGameboard = new Gameboard(10, 10);
+    myGameboard.placeShip(myShip, 0, 0, 'horizontal');
+    myGameboard.receiveAttack(0, 0);
+    expect(myShip.getHits()).toBe(1);
+    expect(myGameboard.gameboard[0][0]).toBe('hit');
+});
+
+test('receiveAttack should miss if no ship is present', () => {
+    myGameboard = new Gameboard(10, 10);
+    myGameboard.receiveAttack(1, 1);
+    expect(myGameboard.gameboard[1][1]).toBe('miss');
+});
+
+test('receiveAttack should not hit out of bounds', () => {
+    myGameboard = new Gameboard(10, 10);
+    expect(() => {
+        myGameboard.receiveAttack(10, 10);
+    }).toThrow('Attack out of bounds');
 });

@@ -69,7 +69,20 @@ export default class Gameboard {
             this.gameboard[startX][startY] === undefined
         ) {
             throw new Error('Attack out of bounds');
+        } else if (this.gameboard[startX][startY] === null) {
+            this.gameboard[startX][startY] = 'miss';
+            
+
+        } else if (typeof this.gameboard[startX][startY] === 'object') {
+            this.gameboard[startX][startY].hit();
+            if (this.gameboard[startX][startY].isSunk()) {
+                this.shipsCount -= 1;
+            }
+            this.gameboard[startX][startY] = 'hit';
+           
+
+        } else {
+            throw new Error('Can not hit same spot twice');
         }
     }
-    
 }
