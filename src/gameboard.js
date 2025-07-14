@@ -14,7 +14,6 @@ export default class Gameboard {
     }
 
     placeShip(ship, startX, startY, orientation){
-
         const length = ship.getLength();
 
         if (orientation === 'horizontal') {
@@ -62,8 +61,15 @@ export default class Gameboard {
                 throw new Error('Ship placement out of bounds');
             }
         }
-
     }
 
+    receiveAttack(startX, startY){
+         if (
+            this.gameboard[startX] === undefined ||
+            this.gameboard[startX][startY] === undefined
+        ) {
+            throw new Error('Attack out of bounds');
+        }
+    }
     
 }
