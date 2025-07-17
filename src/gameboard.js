@@ -64,7 +64,7 @@ export default class Gameboard {
     }
 
     receiveAttack(startX, startY){
-         if (
+        if (
             this.gameboard[startX] === undefined ||
             this.gameboard[startX][startY] === undefined
         ) {
@@ -79,10 +79,16 @@ export default class Gameboard {
                 this.shipsCount -= 1;
             }
             this.gameboard[startX][startY] = 'hit';
-           
 
         } else {
             throw new Error('Can not hit same spot twice');
         }
+    }
+
+    allShipsSunk() {
+        if (this.shipsCount === 0) {
+            return true;
+        }
+        return false;
     }
 }

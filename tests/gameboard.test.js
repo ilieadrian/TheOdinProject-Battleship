@@ -40,6 +40,7 @@ test('receiveAttack should hit a ship', () => {
     expect(myGameboard.gameboard[0][0]).toBe('hit');
 });
 
+
 test('receiveAttack should miss if no ship is present', () => {
     myGameboard = new Gameboard(10, 10);
     myGameboard.receiveAttack(1, 1);
@@ -51,4 +52,19 @@ test('receiveAttack should not hit out of bounds', () => {
     expect(() => {
         myGameboard.receiveAttack(10, 10);
     }).toThrow('Attack out of bounds');
+});
+test('allShipsSunk should return false if not all ships are sunk', () => {
+    myGameboard = new Gameboard(10, 10);
+    const myShip = new Ship(3);
+    myGameboard.placeShip(myShip, 0, 0, 'horizontal');
+    expect(myGameboard.allShipsSunk()).toBe(false);
+});
+test('allShipsSunk should return true if all ships are sunk', () => {
+    myGameboard = new Gameboard(10, 10);
+    const myShip = new Ship(3);
+    myGameboard.placeShip(myShip, 0, 0, 'horizontal');
+    myGameboard.receiveAttack(0, 0);
+    myGameboard.receiveAttack(0, 1);
+    myGameboard.receiveAttack(0, 2);
+    expect(myGameboard.allShipsSunk()).toBe(true);
 });
