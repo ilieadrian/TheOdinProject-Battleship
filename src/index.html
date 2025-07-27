@@ -4,15 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body>
-    <div id="game-container">
-      <h2>Your Board</h2>
-      <div id="player-board" class="board"></div>
 
-      <h2>Enemy Board</h2>
-      <div id="enemy-board" class="board"></div>
+  <div class="bg-gray-50 py-24 sm:py-32 h-full">
+  <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+    <h2 class="text-center text-base/7 font-semibold text-indigo-600">Battleship</h2>
+    <p class="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-3xl">Here i will display the game updates</p>
+    <div class="mt-10 flex gap-4 sm:mt-16 h-full" >
+
+      
+
+      <div class="relative max-lg:row-start-1">
+        <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-t-4xl"></div>
+        <div class="relative flex  flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
+          <div class="px-8 pt-8 sm:px-10 sm:pt-10">
+            <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">TOP MIDDLE PANNEL</p>
+            <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Lorem ipsum, dolor sit amet consectetur adipisicing elit maiores impedit.</p>
+          </div>
+          <div class="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
+            <img src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-performance.png" alt="" class="w-full max-lg:max-w-xs" />
+          </div>
+        </div>
+        <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-black/5 max-lg:rounded-t-4xl"></div>
+      </div>
+
+
+      <div class="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
+        <div class="absolute inset-px rounded-lg bg-white"></div>
+        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
+          <div class="px-8 pt-8 sm:px-10 sm:pt-10">
+            <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Bottom middle paneel</p>
+            <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi.</p>
+          </div>
+          <div class="@container flex flex-1 items-center max-lg:py-6 lg:pb-2">
+            <img src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-security.png" alt="" class="h-[min(152px,40cqw)] object-cover" />
+          </div>
+        </div>
+        <div class="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-black/5"></div>
+      </div>
+
+
+     
+      
     </div>
+  </div>
+</div>
+
+
+    
   </body>
   <script type="module" src="index.js"></script>
 </html>

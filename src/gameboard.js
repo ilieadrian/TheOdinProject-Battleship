@@ -89,20 +89,19 @@ export default class Gameboard {
     return false;
   }
   printBoard() {
-    // console.clear();
-    console.log('Current Gameboard:');
-
-    const display = this.gameboard.map(row => 
-        row.map(cell => {
-            if (cell === null) return '.';
-            if (cell === 'hit') return 'X';
-            if (cell === 'miss') return 'o';
-            if (typeof cell === 'object') return 'S'; // ship
-        }).join(' ')
-    ).join('\n');
+    const display = this.gameboard
+      .map((row) =>
+        row
+          .map((cell) => {
+            if (cell === null) return ".";
+            if (cell === "hit") return "X";
+            if (cell === "miss") return "o";
+            if (typeof cell === "object") return "S"; // ship
+          })
+          .join(" "),
+      )
+      .join("\n");
 
     console.log(display);
-}
-
-  
+  }
 }
