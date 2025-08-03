@@ -1,7 +1,7 @@
 import Gameboard from "./gameboard.js";
 import Player from "./player.js";
 import Ship from "./ship.js";
-// import DOMController from './DOMController.js';
+import renderBoard from "./DOMController.js"
 
 function newGame() {
   //Point 4.2
@@ -17,8 +17,8 @@ function newGame() {
   // player2.gameboard.placeShip(new Ship(2), 3, 4, 'horizontal');
   //You are going to implement a system for allowing players to place their ships later.
 
-  player1.gameboard.printBoard();
-  player2.gameboard.printBoard();
+  player1.gameboard;
+  // player2.gameboard.printBoard();
 }
 
 newGame();
