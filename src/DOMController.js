@@ -1,28 +1,21 @@
 console.log("Hello from dom control")
 
-const player1Board = document.getElementById("player1-board");
-const player2Board = document.getElementById("player2-board");
-
-player1Board.innerHTML = player1.gameboard.printBoard();
-
-
-function renderBoard(board, container, showShips = false) {
+export function renderBoard(board, container, showShips = false) {
   container.innerHTML = '';
-  for (let x = 0; x < 10; x++) {
-    for (let y = 0; y < 10; y++) {
+  for (let x = 0; x < board.length; x++) {
+    for (let y = 0; y < board[x].length; y++) {
       const cell = document.createElement('div');
       cell.dataset.x = x;
       cell.dataset.y = y;
-      cell.classList.add('cell');
+      cell.classList.add('w-8', 'h-8', 'border', 'border-gray-400');
 
       const value = board[x][y];
-      if (value === 'miss') cell.classList.add('miss');
-      else if (value === 'hit') cell.classList.add('hit');
-      else if (typeof value === 'object' && showShips) cell.classList.add('ship');
+      if (value === 'miss') cell.classList.add('bg-blue-300');
+      else if (value === 'hit') cell.classList.add('bg-red-400');
+      else if (typeof value === 'object' && showShips) cell.classList.add('bg-green-400');
+      else cell.classList.add('bg-white');
 
       container.appendChild(cell);
     }
   }
 }
-
-export default { renderBoard };
