@@ -10,9 +10,10 @@ export function renderBoard(board, container, showShips = false) {
       cell.classList.add('w-8', 'h-8', 'border', 'border-gray-400');
 
       const value = board[x][y];
-      if (value === 'miss') cell.classList.add('bg-blue-300');
+      console.log(value)
+      if (value === null) cell.classList.add('bg-blue-300');
       else if (value === 'hit') cell.classList.add('bg-red-400');
-      else if (typeof value === 'object' && showShips) cell.classList.add('bg-green-400');
+      else if (typeof value === 'object' && showShips) cell.textContent="S";
       else cell.classList.add('bg-white');
 
       container.appendChild(cell);

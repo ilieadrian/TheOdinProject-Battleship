@@ -102,6 +102,8 @@ export default class Gameboard {
       )
       .join("\n");
 
+      console.table(display)
+
     return display;
   }
 }
