@@ -3,14 +3,33 @@ import Player from "./player.js";
 import Ship from "./ship.js";
 import { renderBoard } from "./DOMController.js";
 
+
+export default class Game {
+  constructor(userShipSet, cpuShipSet, userGameboard = null) {
+    this.user = new Player('user');
+    this.cpu = new Player('cpu');
+
+    this.userShipSet = userShipSet;
+    this.cpuShipSet = cpuShipSet;
+    this.userGameboard = userGameboard;
+
+    this.gameOver = false;
+    this.isUsersTurn = true;
+    this.winner = null;
+    this.successfulHit = false;
+  }
+}
+
 function newGame() {
   const player1 = new Player("User");
   const player2 = new Player("Computer", true);
 
   player1.gameboard.placeShip(new Ship(3), 0, 0, "horizontal");
   player1.gameboard.placeShip(new Ship(2), 3, 2, "horizontal");
+  player1.gameboard.placeShip(new Ship(4), 4, 6, "vertical");
   player2.gameboard.placeShip(new Ship(3), 1, 1, "vertical");
   player2.gameboard.placeShip(new Ship(4), 5, 3, "vertical");
+  player2.gameboard.placeShip(new Ship(4), 1, 8, "vertical");
 
   const player1Grid = document.getElementById("player1-grid");
   const player2Grid = document.getElementById("player2-grid");
