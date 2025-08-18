@@ -7,10 +7,10 @@ import { renderBoard } from "./DOMController.js";
 export default class Game {
   constructor(userShipSet, cpuShipSet, userGameboard = null) {
     this.user = new Player('user');
-    this.cpu = new Player('cpu');
+    this.computer = new Player('computer');
 
     this.userShipSet = userShipSet;
-    this.cpuShipSet = cpuShipSet;
+    this.computerShipSet = computerShipSet;
     this.userGameboard = userGameboard;
 
     this.gameOver = false;
