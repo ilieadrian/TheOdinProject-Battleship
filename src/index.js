@@ -35,6 +35,11 @@ function newGame() {
 
   console.log(player1.gameboard.gameboard)
 
+  player1.gameboard.receiveAttack(0, 0)
+  player2.gameboard.receiveAttack(3, 0)
+  // player1.gameboard.receiveAttack(0, 0)
+  player2.gameboard.receiveAttack(3, 1)
+
   renderBoard(player1.gameboard.gameboard, player1Grid, true); // show player's ships
   renderBoard(player2.gameboard.gameboard, player2Grid, true); // hide computer ships
 }
