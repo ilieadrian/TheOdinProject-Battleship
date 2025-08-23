@@ -4,11 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship - The Odin Project</title>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="style.css"></script>
+       <link rel="stylesheet" href="style.css">
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
   </head>
   <body>
 
-  <div class="bg-gray-50 py-24 sm:py-32 min-h-screen">
+
+    <body>
+    <div class="container">
+        <h1>⚓ Battleship Game ⚓</h1>
+        
+        <div class="instructions">
+            <p>🎯 <strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
+            <p>🚢 Ships: Carrier (5), Battleship (4), Cruiser (3), Submarine (3), Destroyer (2)</p>
+            <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
+        </div>
+        
+        <div id="game-container"></div>
+    </div>
+
+  <!-- <div class="bg-gray-50 py-24 sm:py-32 min-h-screen">
   <div class="mx-auto px-6">
     <h2 class="text-center text-base/7 font-semibold text-indigo-600">Battleship</h2>
     <p class="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-3xl">Here i will display the game updates</p>
@@ -210,7 +226,7 @@
 
     </div>
   </div>
-</div>
+</div> 
 
 
     

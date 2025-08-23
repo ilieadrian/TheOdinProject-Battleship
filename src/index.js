@@ -4,7 +4,7 @@ import Ship from "./ship.js";
 import { renderBoard } from "./DOMController.js";
 
 
-export default class Game {
+export default class GameManager {
   constructor() {
     this.user = new Player('user');
     this.cpu = new Player('cpu');
@@ -16,7 +16,7 @@ export default class Game {
   }
 }
 
-function newGame() {
+function runGame() {
   const player1 = new Player("User");
   const player2 = new Player("Computer", true);
 
@@ -65,4 +65,5 @@ enemyBoardContainer.addEventListener("click", (e) => {
 
 
 
-newGame();
+runGame();
+
