@@ -6,6 +6,8 @@ export default class Gameboard {
     this.shipsCount = 0;
   }
 
+
+
   generateBoard(r, c) {
     const gameboard = Array.from({ length: r }, () =>
       Array.from({ length: c }, () => null),
@@ -59,6 +61,33 @@ export default class Gameboard {
         this.shipsCount += 1;
       } else {
         throw new Error("Ship placement out of bounds");
+      }
+    }
+  }
+
+  placeShipsRandomly() {
+    const shipLengths = [5, 4, 3, 3, 2]; // Standard Battleship ships
+    
+    for (const length of shipLengths) {
+      let placed = false;
+      let attempts = 0;
+      const maxAttempts = 100;
+      
+      while (!placed && attempts < maxAttempts) {
+        const x = Math.floor(Math.random() * this.gameboard.size);
+        const y = Math.floor(Math.random() * this.gameboard.size);
+        const isHorizontal = Math.random() < 0.5;
+        
+        try {
+          this.gameboard.placeShip(x, y, length, isHorizontal);
+          placed = true;
+        } catch (error) {
+          attempts++;
+        }
+      }
+      
+      if (!placed) {
+        throw new Error(`Failed to place ship of length ${length} after ${maxAttempts} attempts`);
       }
     }
   }

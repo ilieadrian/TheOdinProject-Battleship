@@ -1,10 +1,10 @@
 import Gameboard from "./gameboard.js";
 import Player from "./player.js";
 import Ship from "./ship.js";
-import { renderBoard } from "./DOMController.js";
+import { DOMManager } from "./DOMController.js";
 
 
-export default class GameController{
+export default class  GameController{
   constructor() {
     this.user = new Player('user');
     this.cpu = new Player('cpu');
@@ -13,6 +13,14 @@ export default class GameController{
     this.isUsersTurn = true;
     this.winner = null;
     this.successfulHit = false;
+  }
+
+    initializeGame() {
+    this.player.gameboard.placeShipsRandomly();
+    this.computer.gameboard.placeShipsRandomly();
+    this.currentPlayer = this.player;
+    this.gameOver = false;
+    this.winner = null;
   }
 }
 
@@ -27,8 +35,8 @@ function runGame() {
   player2.gameboard.placeShip(new Ship(4), 5, 3, "vertical");
   player2.gameboard.placeShip(new Ship(4), 1, 8, "vertical");
 
-  // const player1Grid = document.getElementById("player-grid");
-  // const player2Grid = document.getElementById("cpu-grid");
+  const player1Grid = document.getElementById("player-grid");
+  const player2Grid = document.getElementById("cpu-grid");
 
   player1.gameboard.printBoard();
   player2.gameboard.printBoard();
@@ -40,7 +48,7 @@ function runGame() {
   // player1.gameboard.receiveAttack(0, 0)
   player2.gameboard.receiveAttack(3, 1)
 
-  // const enemyBoardContainer = document.getElementById("cpu-grid");
+  const enemyBoardContainer = document.getElementById("cpu-grid");
 
 enemyBoardContainer.addEventListener("click", (e) => {
   if (!e.target.dataset.x || !e.target.dataset.y) return;
