@@ -13,22 +13,19 @@ export default class GameController {
   }
 
   initializeGame() {
-    // Place ships randomly for both players
-    // this.player.placeShipsRandomly();
-    // this.computer.placeShipsRandomly();
+    this.player.placeShipsRandomly();
+    this.computer.placeShipsRandomly();
     this.currentPlayer = this.player;
     this.gameOver = false;
     this.winner = null;
   }
-
-  
 }
 
 
 function runGame(){
   const gameInstance = new GameController();
   gameInstance.initializeGame()
-  console.log("Run game fired", gameInstance.player)
+  console.table(gameInstance)
 }
 
 runGame();
