@@ -1,20 +1,16 @@
-// export default class Gameboard {
-//   constructor(x, y) {
-//     this.rows = x;
-//     this.columns = y;
-//     this.gameboard = this.generateBoard(this.rows, this.columns);
-//     this.shipsCount = 0;
-//   }
+export default class Gameboard {
+    constructor(size = 10) {
+        this.size = size;
+        this.gameboard = this.generateBoard();
+        this.shipsCount = 0;
+    }
 
+    generateBoard() {
+        return Array(this.size).fill(null).map(() => Array(this.size).fill(null));
+    }
 
-
-//   generateBoard(r, c) {
-//     const gameboard = Array.from({ length: r }, () =>
-//       Array.from({ length: c }, () => null),
-//     );
-//     return gameboard;
-//   }
-
+}
+//   
 //   placeShip(ship, startX, startY, orientation) {
 //     const length = ship.getLength();
 

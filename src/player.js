@@ -1,4 +1,4 @@
-// import Gameboard from "./gameboard.js";
+import Gameboard from "./gameboard.js";
 
 // export default class Player {
 //   constructor(name) {
@@ -10,7 +10,7 @@ export default class Player {
   constructor(name, isComputer = false) {
     this.name = name;
     this.isComputer = isComputer;
-    // this.gameboard = new Gameboard();
+    this.gameboard = new Gameboard();
     this.attackedCoordinates = new Set();
   }
 }

@@ -1,4 +1,4 @@
-// import Gameboard from "./gameboard.js";
+import Gameboard from "./gameboard.js";
 import Player from "./player.js";
 // import Ship from "./ship.js";
 // import { DOMManager } from "./DOMController.js";
@@ -28,7 +28,7 @@ export default class GameController {
 function runGame(){
   const gameInstance = new GameController();
   gameInstance.initializeGame()
-  console.log("Run game fired", gameInstance.player.isComputer)
+  console.log("Run game fired", gameInstance.player)
 }
 
 runGame();
