@@ -25,7 +25,9 @@ export default class GameController {
 function runGame(){
   const gameInstance = new GameController();
   gameInstance.initializeGame()
-  console.table(gameInstance)
+  console.log(gameInstance.player.gameboard.printBoard())
+  console.log(gameInstance.computer.gameboard.printBoard())
+
 }
 
 runGame();
