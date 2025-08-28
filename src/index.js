@@ -1,7 +1,7 @@
 import Gameboard from "./gameboard.js";
 import Player from "./player.js";
 // import Ship from "./ship.js";
-// import { DOMManager } from "./DOMController.js";
+import  { DOMController } from "./DOMController.js";
 
 export default class GameController {
   constructor(){
@@ -25,6 +25,8 @@ export default class GameController {
 function runGame(){
   const gameInstance = new GameController();
   gameInstance.initializeGame()
+  const domController = new DOMController(gameInstance);
+  console.log(domController)
   console.log(gameInstance.player.gameboard.printBoard())
   console.log(gameInstance.computer.gameboard.printBoard())
 

@@ -1,4 +1,8 @@
-// console.log("Hello from dom control")
+export class DOMController {
+        constructor(gameInstance) {
+        this.gameInstance = gameInstance;
+    }
+} 
 
 
 // export class DOMManager {
