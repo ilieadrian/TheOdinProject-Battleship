@@ -19,6 +19,13 @@ export default class GameController {
     this.gameOver = false;
     this.winner = null;
   }
+
+  getPlayer() {
+    return this.player;
+  }
+  getComputer() {
+    return this.computer;
+  }
 }
 
 
@@ -26,9 +33,10 @@ function runGame(){
   const gameInstance = new GameController();
   gameInstance.initializeGame()
   const domController = new DOMController(gameInstance);
-  console.log(domController)
-  console.log(gameInstance.player.gameboard.printBoard())
-  console.log(gameInstance.computer.gameboard.printBoard())
+  domController.setupGame()
+  // console.log(domController)
+  // console.log(gameInstance.player.gameboard.printBoard())
+  // console.log(gameInstance.computer.gameboard.printBoard())
 
 }
 

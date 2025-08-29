@@ -8,7 +8,7 @@ export default class Gameboard {
     }
 
     generateBoard() {
-        return Array(this.size).fill(null).map(() => Array(this.size).fill(null));
+      return Array(this.size).fill(null).map(() => Array(this.size).fill(null));
     }
 
     isValidCoordinate(x, y) {
