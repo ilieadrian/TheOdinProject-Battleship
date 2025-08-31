@@ -26,6 +26,10 @@ export default class GameController {
   getComputer() {
     return this.computer;
   }
+
+  getCurrentPlayer() {
+    return this.currentPlayer;
+  }
 }
 
 
