@@ -30,6 +30,12 @@ export default class GameController {
   getCurrentPlayer() {
     return this.currentPlayer;
   }
+
+  resetGame() {
+    this.player = new Player('Player', false);
+    this.computer = new Player('Computer', true);
+    this.initializeGame();
+  }
 }
 
 

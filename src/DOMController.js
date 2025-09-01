@@ -92,21 +92,19 @@ updateDisplay() {
     const statusDiv = document.createElement('div');
     statusDiv.id = 'game-status';
     statusDiv.className = 'game-status';
-    statusDiv.textContent = 'Game status - hard coded'
     gameContainer.appendChild(statusDiv);
 
     // Create game controls
     const controlsDiv = document.createElement('div');
     controlsDiv.className = 'game-controls';
-    controlsDiv.textContent = 'Game controls - hard coded'
     
     const newGameButton = document.createElement('button');
     newGameButton.textContent = 'New Game';
     newGameButton.id = 'new-game-btn';
-    // newGameButton.addEventListener('click', () => {
-    // //   this.gameManager.resetGame();
-    //   this.setupGame();
-    // });
+    newGameButton.addEventListener('click', () => {
+      this.gameInstance.resetGame();
+      this.setupGame();
+    });
     
     controlsDiv.appendChild(newGameButton);
     gameContainer.appendChild(controlsDiv);
