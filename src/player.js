@@ -35,6 +35,10 @@ export default class Player {
     }
   }
 
+  getGameboard() {
+    return this.gameboard;
+  }
+
   
 
   

@@ -34,44 +34,43 @@ export class DOMController {
     return container;
   }
 
-  //   renderGameboard(gameboard, container, showShips = false) {
-  //   const cells = container.querySelectorAll('.cell');
+    renderGameboard(gameboard, container, showShips = false) {
+    const cells = container.querySelectorAll('.cell');
     
-  //   cells.forEach(cell => {
-  //     const x = parseInt(cell.dataset.x);
-  //     const y = parseInt(cell.dataset.y);
+    cells.forEach(cell => {
+      const x = parseInt(cell.dataset.x);
+      const y = parseInt(cell.dataset.y);
       
-  //     // Clear previous classes
-  //     cell.className = 'cell';
+      cell.className = 'cell';
       
-  //     const ship = gameboard.getShipAt(x, y);
-  //     const hasBeenAttacked = gameboard.hasBeenAttacked(x, y);
+      const ship = gameboard.getShipAt(x, y);
+      const hasBeenAttacked = gameboard.hasBeenAttacked(x, y);
       
-  //     if (hasBeenAttacked) {
-  //       if (ship) {
-  //         cell.classList.add('hit');
-  //         if (ship.isSunk()) {
-  //           cell.classList.add('sunk');
-  //         }
-  //       } else {
-  //         cell.classList.add('miss');
-  //       }
-  //     } else if (showShips && ship) {
-  //       cell.classList.add('ship');
-  //     }
-  //   });
-  // }
+      if (hasBeenAttacked) {
+        if (ship) {
+          cell.classList.add('hit');
+          if (ship.isSunk()) {
+            cell.classList.add('sunk');
+          }
+        } else {
+          cell.classList.add('miss');
+        }
+      } else if (showShips && ship) {
+        cell.classList.add('ship');
+      }
+    });
+  }
 
 updateDisplay() {
     const playerBoard = document.getElementById('player-board');
     const enemyBoard = document.getElementById('enemy-board');
     
     if (playerBoard) {
-      // this.renderGameboard(this.gameInstance.getPlayer().getGameboard(), playerBoard, true);
+      this.renderGameboard(this.gameInstance.getPlayer().getGameboard(), playerBoard, true);
     }
     
     if (enemyBoard) {
-      // this.renderGameboard(this.gameInstance.getComputer().getGameboard(), enemyBoard, false);
+      this.renderGameboard(this.gameInstance.getComputer().getGameboard(), enemyBoard, true); //move to false after debuging
     }
 
     // Update game status
