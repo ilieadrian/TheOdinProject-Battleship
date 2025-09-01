@@ -75,7 +75,27 @@ updateDisplay() {
     }
 
     // Update game status
-    // this.updateGameStatus();
+    this.updateGameStatus();
+  }
+
+  updateGameStatus() {
+    const statusElement = document.getElementById('game-status');
+    if (!statusElement) return;
+    
+    if (this.gameInstance.isGameOver()) {
+      const winner = this.gameInstance.getWinner();
+      statusElement.textContent = `Game Over! ${winner.getName()} wins!`;
+      statusElement.className = 'game-status game-over';
+    } else {
+      const currentPlayer = this.gameInstance.getCurrentPlayer();
+      if (currentPlayer === this.gameInstance.getPlayer()) {
+        statusElement.textContent = 'Your turn - Click on enemy waters to attack!';
+        statusElement.className = 'game-status player-turn';
+      } else {
+        statusElement.textContent = 'Computer is thinking...';
+        statusElement.className = 'game-status computer-turn';
+      }
+    }
   }
 
   setupGame() {
@@ -88,13 +108,12 @@ updateDisplay() {
     // Clear existing content
     gameContainer.innerHTML = '';
 
-    // Create game status
     const statusDiv = document.createElement('div');
     statusDiv.id = 'game-status';
     statusDiv.className = 'game-status';
     gameContainer.appendChild(statusDiv);
 
-    // Create game controls
+    // Game controls
     const controlsDiv = document.createElement('div');
     controlsDiv.className = 'game-controls';
     
@@ -109,16 +128,16 @@ updateDisplay() {
     controlsDiv.appendChild(newGameButton);
     gameContainer.appendChild(controlsDiv);
 
-    // Create boards container
+    // Boards container
     const boardsContainer = document.createElement('div');
     boardsContainer.className = 'boards-container';
 
-    // Create player board
+    // Player board
     const playerBoardContainer = this.createGameboard(this.gameInstance.getPlayer(), false);
     playerBoardContainer.id = 'player-board';
     boardsContainer.appendChild(playerBoardContainer);
 
-    // Create enemy board
+    // Enemy board
     const enemyBoardContainer = this.createGameboard(this.gameInstance.getComputer(), true);
     enemyBoardContainer.id = 'enemy-board';
     boardsContainer.appendChild(enemyBoardContainer);
