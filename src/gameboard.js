@@ -9,11 +9,11 @@ export default class Gameboard {
         this.attackedCoordinates = new Set();
     }
 
-    generateBoard() {
-      return Array(this.size).fill(null).map(() => Array(this.size).fill(null));
-    }
+  generateBoard() {
+    return Array(this.size).fill(null).map(() => Array(this.size).fill(null));
+  }
 
-    isValidCoordinate(x, y) {
+  isValidCoordinate(x, y) {
     return x >= 0 && x < this.size && y >= 0 && y < this.size;
   }
 
@@ -62,6 +62,32 @@ export default class Gameboard {
 
     this.ships.push(shipData);
     return ship;
+  }
+
+  receiveAttack(x, y) {
+    if (!this.isValidCoordinate(x, y)) {
+      throw new Error('Invalid coordinates');
+    }
+
+    const coordinateKey = `${x},${y}`;
+    if (this.attackedCoordinates.has(coordinateKey)) {
+      throw new Error('Coordinate already attacked');
+    }
+
+    this.attackedCoordinates.add(coordinateKey);
+
+    const target = this.gameboard[y][x];
+    
+    if (target === null) {
+      // Miss
+      this.missedAttacks.push([x, y]);
+      return { hit: false, ship: null, sunk: false };
+    } else {
+      // Hit
+      target.hit();
+      const sunk = target.isSunk();
+      return { hit: true, ship: target, sunk };
+    }
   }
 
 

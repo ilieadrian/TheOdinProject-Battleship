@@ -18,6 +18,34 @@ export default class GameController {
     this.winner = null;
   }
 
+
+  //Curently working here
+  playerAttack(x, y) {
+    if (this.gameOver) {
+      throw new Error('Game is over');
+    }
+
+    if (this.currentPlayer !== this.player) {
+      throw new Error('Not player\'s turn');
+    }
+
+    try {
+      const result = this.player.attack(this.computer.getGameboard(), x, y);
+      
+      if (this.computer.getGameboard().allShipsSunk()) {
+        this.gameOver = true;
+        this.winner = this.player;
+      } else if (!result.hit) {
+        // Switch turns only if it's a miss
+        this.switchTurns();
+      }
+      
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   getPlayer() {
     return this.player;
   }

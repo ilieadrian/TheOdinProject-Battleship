@@ -34,6 +34,34 @@ export class DOMController {
     return container;
   }
 
+  handleEnemyCellClick(x, y) {
+    if (this.gameInstance.isGameOver()) {
+      return;
+    }
+
+    if (this.gameInstance.getCurrentPlayer() !== this.gameInstance.getPlayer()) {
+      return;
+    }
+
+    try {
+      const result = this.gameInstance.playerAttack(x, y);
+      this.updateDisplay();
+      
+      // If game not over and it's computer's turn, make computer move
+      if (!this.gameInstance.isGameOver() && this.gameInstance.getCurrentPlayer() === this.gameInstance.getComputer()) {
+        setTimeout(() => {
+          this.gameInstance.computerTurn();
+          this.updateDisplay();
+        }, 1000);
+      }
+      
+    } catch (error) {
+      console.log('Invalid move:', error.message);
+    }
+  }
+
+
+
     renderGameboard(gameboard, container, showShips = false) {
     const cells = container.querySelectorAll('.cell');
     

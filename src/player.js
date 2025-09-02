@@ -8,6 +8,15 @@ export default class Player {
     this.attackedCoordinates = new Set();
   }
 
+    //Curently working here
+  attack(enemyGameboard, x, y) {
+    if (enemyGameboard.hasBeenAttacked(x, y)) {
+      throw new Error('Coordinate already attacked');
+    }
+    
+    return enemyGameboard.receiveAttack(x, y);
+  }
+
   placeShipsRandomly() {
     const shipLengths = [5, 4, 3, 3, 2]; 
     
@@ -38,9 +47,4 @@ export default class Player {
   getGameboard() {
     return this.gameboard;
   }
-
-  
-
-  
-
 }
