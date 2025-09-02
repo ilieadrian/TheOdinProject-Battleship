@@ -90,6 +90,9 @@ export default class Gameboard {
     }
   }
 
+  allShipsSunk() {
+    return this.ships.every(shipData => shipData.ship.isSunk());
+  }
 
   getShipAt(x, y) {
     if (!this.isValidCoordinate(x, y)) return null;
