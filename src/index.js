@@ -18,57 +18,39 @@ export default class GameController {
     this.winner = null;
   }
 
-  //Curently working here
-  playerAttack(x, y) {
-    if (this.gameOver) {
-      throw new Error('Game is over');
-    }
+playerAttack(x, y) {
+  if (this.gameOver) throw new Error('Game is over');
+  if (this.currentPlayer !== this.player) throw new Error("Not player's turn");
 
-    if (this.currentPlayer !== this.player) {
-      throw new Error('Not player\'s turn');
-    }
+  const result = this.player.attack(this.computer.getGameboard(), x, y);
 
-    try {
-      const result = this.player.attack(this.computer.getGameboard(), x, y);
-      
-      if (this.computer.getGameboard().allShipsSunk()) {
-        this.gameOver = true;
-        this.winner = this.player;
-      } else if (!result.hit) {
-        // Switch turns only if it's a miss
-        this.switchTurns();
-      }
-      
-      return result;
-    } catch (error) {
-      throw error;
-    }
+  if (this.computer.getGameboard().allShipsSunk()) {
+    this.gameOver = true;
+    this.winner = this.player;
   }
 
-  computerTurn() {
-    if (this.gameOver) {
-      return null;
-    }
+  this.switchTurns();  // <--- always switch
+  return result;
+}
 
-    if (this.currentPlayer !== this.computer) {
-      throw new Error('Not computer\'s turn');
-    }
+computerTurn() {
+  if (this.gameOver) return null;
+  if (this.currentPlayer !== this.computer) throw new Error("Not computer's turn");
 
-    const result = this.computer.makeRandomAttack(this.player.getGameboard());
-    
-    if (this.player.getGameboard().allShipsSunk()) {
-      this.gameOver = true;
-      this.winner = this.computer;
-    } else if (!result.hit) {
-      // Switch turns only if it's a miss
-      this.switchTurns();
-    }
-    
-    return result;
+  const result = this.computer.makeRandomAttack(this.player.getGameboard());
+
+  if (this.player.getGameboard().allShipsSunk()) {
+    this.gameOver = true;
+    this.winner = this.computer;
   }
+
+  this.switchTurns();  // <--- always switch
+  return result;
+}
 
   switchTurns() {
     this.currentPlayer = this.currentPlayer === this.player ? this.computer : this.player;
+    console.log("switchTurns fired, curent playa: ", this.currentPlayer.name)
   }
 
   getPlayer() {

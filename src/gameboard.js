@@ -79,11 +79,13 @@ export default class Gameboard {
     const target = this.gameboard[y][x];
     
     if (target === null) {
+      console.log("Missed hit")
       // Miss
       this.missedAttacks.push([x, y]);
       return { hit: false, ship: null, sunk: false };
     } else {
       // Hit
+      console.log("hit hit")
       target.hit();
       const sunk = target.isSunk();
       return { hit: true, ship: target, sunk };

@@ -62,9 +62,7 @@ export class DOMController {
     }
   }
 
-
-
-    renderGameboard(gameboard, container, showShips = false) {
+  renderGameboard(gameboard, container, showShips = false) {
     const cells = container.querySelectorAll('.cell');
     
     cells.forEach(cell => {

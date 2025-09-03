@@ -9,6 +9,7 @@ export default class Player {
   }
 
   attack(enemyGameboard, x, y) {
+    console.log("Atack method fired")
     if (enemyGameboard.hasBeenAttacked(x, y)) {
       throw new Error('Coordinate already attacked');
     }
@@ -16,7 +17,8 @@ export default class Player {
     return enemyGameboard.receiveAttack(x, y);
   }
 
-    makeRandomAttack(enemyGameboard) {
+  makeRandomAttack(enemyGameboard) {
+      console.log("Computer will make a random atack")
     if (!this.isComputer) {
       throw new Error('Only computer players can make random attacks');
     }
@@ -30,8 +32,6 @@ export default class Player {
         }
       }
     }
-
-    console.log(availableCoordinates)
 
     if (availableCoordinates.length === 0) {
       throw new Error('No more moves available');
