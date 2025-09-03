@@ -92,6 +92,10 @@ export default class Gameboard {
     }
   }
 
+  getMissedAttacks() {
+    return [...this.missedAttacks];
+  }
+
   allShipsSunk() {
     return this.ships.every(shipData => shipData.ship.isSunk());
   }
@@ -99,6 +103,13 @@ export default class Gameboard {
   getShipAt(x, y) {
     if (!this.isValidCoordinate(x, y)) return null;
     return this.gameboard[y][x];
+  }
+
+  getShips() {
+    return this.ships.map(shipData => ({
+      ship: shipData.ship,
+      coordinates: [...shipData.coordinates]
+    }));
   }
 
   hasBeenAttacked(x, y) {
