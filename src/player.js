@@ -8,7 +8,6 @@ export default class Player {
     this.attackedCoordinates = new Set();
   }
 
-    //Curently working here
   attack(enemyGameboard, x, y) {
     if (enemyGameboard.hasBeenAttacked(x, y)) {
       throw new Error('Coordinate already attacked');

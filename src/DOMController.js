@@ -36,10 +36,12 @@ export class DOMController {
 
   handleEnemyCellClick(x, y) {
     if (this.gameInstance.isGameOver()) {
+      this.updateDisplay()
       return;
     }
 
     if (this.gameInstance.getCurrentPlayer() !== this.gameInstance.getPlayer()) {
+      this.updateDisplay()
       return;
     }
 

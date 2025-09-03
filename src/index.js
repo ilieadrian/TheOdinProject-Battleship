@@ -18,7 +18,6 @@ export default class GameController {
     this.winner = null;
   }
 
-
   //Curently working here
   playerAttack(x, y) {
     if (this.gameOver) {
@@ -44,6 +43,10 @@ export default class GameController {
     } catch (error) {
       throw error;
     }
+  }
+
+  switchTurns() {
+    this.currentPlayer = this.currentPlayer === this.player ? this.computer : this.player;
   }
 
   getPlayer() {
