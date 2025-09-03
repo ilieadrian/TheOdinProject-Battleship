@@ -70,7 +70,15 @@ export default class Player {
     }
   }
 
+  getName() {
+    return this.name;
+  }
+
   getGameboard() {
     return this.gameboard;
+  }
+
+  isComputerPlayer() {
+    return this.isComputer;
   }
 }
