@@ -45,6 +45,28 @@ export default class GameController {
     }
   }
 
+  computerTurn() {
+    if (this.gameOver) {
+      return null;
+    }
+
+    if (this.currentPlayer !== this.computer) {
+      throw new Error('Not computer\'s turn');
+    }
+
+    const result = this.computer.makeRandomAttack(this.player.getGameboard());
+    
+    if (this.player.getGameboard().allShipsSunk()) {
+      this.gameOver = true;
+      this.winner = this.computer;
+    } else if (!result.hit) {
+      // Switch turns only if it's a miss
+      this.switchTurns();
+    }
+    
+    return result;
+  }
+
   switchTurns() {
     this.currentPlayer = this.currentPlayer === this.player ? this.computer : this.player;
   }

@@ -16,6 +16,33 @@ export default class Player {
     return enemyGameboard.receiveAttack(x, y);
   }
 
+    makeRandomAttack(enemyGameboard) {
+    if (!this.isComputer) {
+      throw new Error('Only computer players can make random attacks');
+    }
+
+    const availableCoordinates = [];
+    
+    for (let x = 0; x < enemyGameboard.size; x++) {
+      for (let y = 0; y < enemyGameboard.size; y++) {
+        if (!enemyGameboard.hasBeenAttacked(x, y)) {
+          availableCoordinates.push([x, y]);
+        }
+      }
+    }
+
+    console.log(availableCoordinates)
+
+    if (availableCoordinates.length === 0) {
+      throw new Error('No more moves available');
+    }
+
+    const randomIndex = Math.floor(Math.random() * availableCoordinates.length);
+    const [x, y] = availableCoordinates[randomIndex];
+    
+    return this.attack(enemyGameboard, x, y);
+  }
+
   placeShipsRandomly() {
     const shipLengths = [5, 4, 3, 3, 2]; 
     
