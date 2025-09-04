@@ -3,12 +3,12 @@ export class DOMController {
     this.gameInstance = gameInstance;
   }
 
-  createEmptyGameBoard(){
+  createEmptyGameBoard(isShipBoard = false){
     const container = document.createElement("div");
     container.className = "gameboard player-board";
 
     const title = document.createElement("h3");
-    title.textContent = "Your Fleet";
+    title.textContent = isShipBoard ? "Drag ship to board" : "Your Fleet";
     container.appendChild(title);
 
     const board = document.createElement("div");
@@ -243,39 +243,17 @@ export class DOMController {
     boardsContainer.className = "boards-container";
 
     // Player board
-    const playerBoardContainer = this.createEmptyGameBoard()
+    const playerBoardContainer = this.createEmptyGameBoard(false)
     playerBoardContainer.id = "empty-player-board";
+
     boardsContainer.appendChild(playerBoardContainer);
 
     // Place ship container
-    const container = document.createElement("div");
-    container.className = "gameboard";
-        const titles = document.createElement("h3");
-    titles.textContent = "Select";
-        container.appendChild(titles);
+    const shipBoardContainer = this.createEmptyGameBoard(true)
+    playerBoardContainer.id = "ship-container-board";
 
-
-
-     
-    
-    
-    boardsContainer.appendChild(container)
-    //display update
+    boardsContainer.appendChild(shipBoardContainer);
     gameContainer.appendChild(boardsContainer);
     this.updateDisplay();
-
-    //ciorna
-
-
-    const board = document.createElement("div");
-    board.className = "board-grid";
-
-
-    container.appendChild(board);
-    return container;
-
-   
-
-    container.appendChild(board);
   }
 }
