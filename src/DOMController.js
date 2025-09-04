@@ -3,6 +3,34 @@ export class DOMController {
     this.gameInstance = gameInstance;
   }
 
+  createEmptyGameBoard(){
+    const container = document.createElement("div");
+    container.className = "gameboard player-board";
+
+    const title = document.createElement("h3");
+    title.textContent = "Your Fleet";
+    container.appendChild(title);
+
+    const board = document.createElement("div");
+    board.className = "board-grid";
+
+    for (let y = 0; y < 10; y++) {
+      for (let x = 0; x < 10; x++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.dataset.x = x;
+        cell.dataset.y = y;
+
+  
+
+        board.appendChild(cell);
+      }
+    }
+
+    container.appendChild(board);
+    return container;
+  }
+
   createGameboard(player, isEnemy = false) {
     const container = document.createElement("div");
     container.className = `gameboard ${isEnemy ? "enemy-board" : "player-board"}`;
@@ -200,6 +228,54 @@ export class DOMController {
   }
 
   setupGame(){
-    this.playGame()
+    // this.playGame()
+
+    const gameContainer = document.getElementById("game-container");
+    if (!gameContainer) {
+      console.error("Game container not found");
+      return;
+    }
+
+    // Clear existing content
+    gameContainer.innerHTML = "";
+
+    const boardsContainer = document.createElement("div");
+    boardsContainer.className = "boards-container";
+
+    // Player board
+    const playerBoardContainer = this.createEmptyGameBoard()
+    playerBoardContainer.id = "empty-player-board";
+    boardsContainer.appendChild(playerBoardContainer);
+
+    // Place ship container
+    const container = document.createElement("div");
+    container.className = "gameboard";
+        const titles = document.createElement("h3");
+    titles.textContent = "Select";
+        container.appendChild(titles);
+
+
+
+     
+    
+    
+    boardsContainer.appendChild(container)
+    //display update
+    gameContainer.appendChild(boardsContainer);
+    this.updateDisplay();
+
+    //ciorna
+
+
+    const board = document.createElement("div");
+    board.className = "board-grid";
+
+
+    container.appendChild(board);
+    return container;
+
+   
+
+    container.appendChild(board);
   }
 }

@@ -99,7 +99,6 @@ runGame();
 
 
 //To add
-// Add ending to the game
 // Add ships by hand and images for ships + UI revamping
 // Add sounds
 // AI refining - if a hit is detected it hits the nearby cells, 
