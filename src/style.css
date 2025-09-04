@@ -1,208 +1,220 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  min-height: 100vh;
+}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            min-height: 100vh;
-        }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+.game-controls {
+  margin: 20px 0;
+}
 
-        .game-controls {
-            margin: 20px 0;
-        }
+button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-        button {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+button:hover {
+  background: #45a049;
+}
 
-        button:hover {
-            background: #45a049;
-        }
+button:active {
+  transform: translateY(1px);
+}
 
-        button:active {
-            transform: translateY(1px);
-        }
+.game-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 8px;
+  min-height: 20px;
+}
 
-        .game-status {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 8px;
-            min-height: 20px;
-        }
+.game-status.player-turn {
+  background: rgba(76, 175, 80, 0.2);
+  border: 2px solid #4caf50;
+}
 
-        .game-status.player-turn {
-            background: rgba(76, 175, 80, 0.2);
-            border: 2px solid #4CAF50;
-        }
+.game-status.computer-turn {
+  background: rgba(255, 152, 0, 0.2);
+  border: 2px solid #ff9800;
+}
 
-        .game-status.computer-turn {
-            background: rgba(255, 152, 0, 0.2);
-            border: 2px solid #FF9800;
-        }
+.game-status.game-over {
+  background: rgba(244, 67, 54, 0.2);
+  border: 2px solid #f44336;
+  animation: pulse 1s infinite;
+}
 
-        .game-status.game-over {
-            background: rgba(244, 67, 54, 0.2);
-            border: 2px solid #f44336;
-            animation: pulse 1s infinite;
-        }
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
+.boards-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 30px;
+}
 
-        .boards-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 30px;
-        }
+.gameboard {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
 
-        .gameboard {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
+.gameboard h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
 
-        .gameboard h3 {
-            margin-top: 0;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-        }
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 35px);
+  grid-template-rows: repeat(10, 35px);
+  gap: 2px;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  border-radius: 8px;
+}
 
-        .board-grid {
-            display: grid;
-            grid-template-columns: repeat(10, 35px);
-            grid-template-rows: repeat(10, 35px);
-            gap: 2px;
-            margin: 0 auto;
-            background: rgba(0,0,0,0.3);
-            padding: 5px;
-            border-radius: 8px;
-        }
+.cell {
+  width: 35px;
+  height: 35px;
+  background: #87ceeb;
+  border: 1px solid #4682b4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  position: relative;
+}
 
-        .cell {
-            width: 35px;
-            height: 35px;
-            background: #87CEEB;
-            border: 1px solid #4682B4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            position: relative;
-        }
+.cell:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
 
-        .cell:hover {
-            transform: scale(1.1);
-            z-index: 1;
-        }
+.enemy-board .cell {
+  cursor: crosshair;
+}
 
-        .enemy-board .cell {
-            cursor: crosshair;
-        }
+.enemy-board .cell:hover {
+  background: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
 
-        .enemy-board .cell:hover {
-            background: #FFD700;
-            box-shadow: 0 0 10px rgba(255,215,0,0.7);
-        }
+.cell.ship {
+  background: #708090;
+  border-color: #2f4f4f;
+}
 
-        .cell.ship {
-            background: #708090;
-            border-color: #2F4F4F;
-        }
+.cell.hit {
+  background: #ff4444;
+  border-color: #cc0000;
+  position: relative;
+}
 
-        .cell.hit {
-            background: #FF4444;
-            border-color: #CC0000;
-            position: relative;
-        }
+.cell.hit::after {
+  content: "💥";
+  font-size: 20px;
+}
 
-        .cell.hit::after {
-            content: '💥';
-            font-size: 20px;
-        }
+.cell.miss {
+  background: #4169e1;
+  border-color: #0000cd;
+  position: relative;
+}
 
-        .cell.miss {
-            background: #4169E1;
-            border-color: #0000CD;
-            position: relative;
-        }
+.cell.miss::after {
+  content: "💧";
+  font-size: 16px;
+}
 
-        .cell.miss::after {
-            content: '💧';
-            font-size: 16px;
-        }
+.cell.sunk {
+  background: #8b0000;
+  border-color: #4b0000;
+  animation: sinkAnimation 0.5s ease-out;
+}
 
-        .cell.sunk {
-            background: #8B0000;
-            border-color: #4B0000;
-            animation: sinkAnimation 0.5s ease-out;
-        }
+.cell.sunk::after {
+  content: "💀";
+  font-size: 18px;
+}
 
-        .cell.sunk::after {
-            content: '💀';
-            font-size: 18px;
-        }
+@keyframes sinkAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+    background: #ff0000;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
-        @keyframes sinkAnimation {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); background: #FF0000; }
-            100% { transform: scale(1); }
-        }
+.instructions {
+  margin: 30px 0;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
 
-        .instructions {
-            margin: 30px 0;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
+@media (max-width: 768px) {
+  .boards-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-        @media (max-width: 768px) {
-            .boards-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .board-grid {
-                grid-template-columns: repeat(10, 30px);
-                grid-template-rows: repeat(10, 30px);
-            }
-            
-            .cell {
-                width: 30px;
-                height: 30px;
-            }
-    }
+  h1 {
+    font-size: 2rem;
+  }
+
+  .board-grid {
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+  }
+
+  .cell {
+    width: 30px;
+    height: 30px;
+  }
+}

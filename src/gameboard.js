@@ -1,16 +1,18 @@
 import Ship from "./ship.js";
 
 export default class Gameboard {
-    constructor(size = 10) {
-        this.size = size;
-        this.gameboard = this.generateBoard();
-        this.ships = [];
-        this.missedAttacks = [];
-        this.attackedCoordinates = new Set();
-    }
+  constructor(size = 10) {
+    this.size = size;
+    this.gameboard = this.generateBoard();
+    this.ships = [];
+    this.missedAttacks = [];
+    this.attackedCoordinates = new Set();
+  }
 
   generateBoard() {
-    return Array(this.size).fill(null).map(() => Array(this.size).fill(null));
+    return Array(this.size)
+      .fill(null)
+      .map(() => Array(this.size).fill(null));
   }
 
   isValidCoordinate(x, y) {
@@ -38,24 +40,24 @@ export default class Gameboard {
 
   placeShip(x, y, length, isHorizontal = true) {
     if (!this.isValidCoordinate(x, y)) {
-      throw new Error('Invalid coordinates');
+      throw new Error("Invalid coordinates");
     }
 
     if (!this.canPlaceShip(x, y, length, isHorizontal)) {
-      throw new Error('Cannot place ship at specified location');
+      throw new Error("Cannot place ship at specified location");
     }
 
     const ship = new Ship(length);
     const shipData = {
       ship,
-      coordinates: []
+      coordinates: [],
     };
 
     // Place ship on board
     for (let i = 0; i < length; i++) {
       const placeX = isHorizontal ? x + i : x;
       const placeY = isHorizontal ? y : y + i;
-      
+
       this.gameboard[placeX][placeY] = ship;
       shipData.coordinates.push([placeX, placeY]);
     }
@@ -66,26 +68,26 @@ export default class Gameboard {
 
   receiveAttack(x, y) {
     if (!this.isValidCoordinate(x, y)) {
-      throw new Error('Invalid coordinates');
+      throw new Error("Invalid coordinates");
     }
 
     const coordinateKey = `${x},${y}`;
     if (this.attackedCoordinates.has(coordinateKey)) {
-      throw new Error('Coordinate already attacked');
+      throw new Error("Coordinate already attacked");
     }
 
     this.attackedCoordinates.add(coordinateKey);
 
     const target = this.gameboard[y][x];
-    
+
     if (target === null) {
-      console.log("Missed hit")
+      console.log("Missed hit");
       // Miss
       this.missedAttacks.push([x, y]);
       return { hit: false, ship: null, sunk: false };
     } else {
       // Hit
-      console.log("hit hit")
+      console.log("hit hit");
       target.hit();
       const sunk = target.isSunk();
       return { hit: true, ship: target, sunk };
@@ -97,7 +99,7 @@ export default class Gameboard {
   }
 
   allShipsSunk() {
-    return this.ships.every(shipData => shipData.ship.isSunk());
+    return this.ships.every((shipData) => shipData.ship.isSunk());
   }
 
   getShipAt(x, y) {
@@ -106,9 +108,9 @@ export default class Gameboard {
   }
 
   getShips() {
-    return this.ships.map(shipData => ({
+    return this.ships.map((shipData) => ({
       ship: shipData.ship,
-      coordinates: [...shipData.coordinates]
+      coordinates: [...shipData.coordinates],
     }));
   }
 

@@ -1,7 +1,7 @@
 export default class Ship {
   constructor(length) {
     if (length <= 0) {
-      throw new Error('Ship length must be greater than 0');
+      throw new Error("Ship length must be greater than 0");
     }
     this.length = length;
     this.hits = 0;

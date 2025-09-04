@@ -2,10 +2,10 @@ import Player from "./player.js";
 import { DOMController } from "./DOMController.js";
 
 export default class GameController {
-  constructor(){
-    this.player = new Player('Player', false);     
-    this.computer = new Player('Computer', true);  
-    this.currentPlayer = this.player;              
+  constructor() {
+    this.player = new Player("Player", false);
+    this.computer = new Player("Computer", true);
+    this.currentPlayer = this.player;
     this.gameOver = false;
     this.winner = null;
   }
@@ -18,39 +18,44 @@ export default class GameController {
     this.winner = null;
   }
 
-playerAttack(x, y) {
-  if (this.gameOver) throw new Error('Game is over');
-  if (this.currentPlayer !== this.player) throw new Error("Not player's turn");
+  playerAttack(x, y) {
+    if (this.gameOver) throw new Error("Game is over");
+    if (this.currentPlayer !== this.player)
+      throw new Error("Not player's turn");
 
-  const result = this.player.attack(this.computer.getGameboard(), x, y);
+    const result = this.player.attack(this.computer.getGameboard(), x, y);
 
-  if (this.computer.getGameboard().allShipsSunk()) {
-    this.gameOver = true;
-    this.winner = this.player;
+    if (this.computer.getGameboard().allShipsSunk()) {
+      this.gameOver = true;
+      this.winner = this.player;
+      console.log("Game OVER - Winner", this.winner)
+    }
+
+    this.switchTurns(); // <--- always switch
+    return result;
   }
 
-  this.switchTurns();  // <--- always switch
-  return result;
-}
+  computerTurn() {
+    if (this.gameOver) return null;
+    if (this.currentPlayer !== this.computer)
+      throw new Error("Not computer's turn");
 
-computerTurn() {
-  if (this.gameOver) return null;
-  if (this.currentPlayer !== this.computer) throw new Error("Not computer's turn");
+    const result = this.computer.makeRandomAttack(this.player.getGameboard());
 
-  const result = this.computer.makeRandomAttack(this.player.getGameboard());
+    if (this.player.getGameboard().allShipsSunk()) {
+      this.gameOver = true;
+      this.winner = this.computer;
+      console.log("Game OVER - Winner", this.winner)
+    }
 
-  if (this.player.getGameboard().allShipsSunk()) {
-    this.gameOver = true;
-    this.winner = this.computer;
+    this.switchTurns(); // <--- always switch
+    return result;
   }
-
-  this.switchTurns();  // <--- always switch
-  return result;
-}
 
   switchTurns() {
-    this.currentPlayer = this.currentPlayer === this.player ? this.computer : this.player;
-    console.log("switchTurns fired, curent playa: ", this.currentPlayer.name)
+    this.currentPlayer =
+      this.currentPlayer === this.player ? this.computer : this.player;
+    console.log("switchTurns fired, curent playa: ", this.currentPlayer.name);
   }
 
   getPlayer() {
@@ -74,20 +79,29 @@ computerTurn() {
   }
 
   resetGame() {
-    this.player = new Player('Player', false);
-    this.computer = new Player('Computer', true);
+    this.player = new Player("Player", false);
+    this.computer = new Player("Computer", true);
     this.initializeGame();
   }
 }
 
-function runGame(){
+function runGame() {
   const gameInstance = new GameController();
-  gameInstance.initializeGame()
+  gameInstance.initializeGame();
   const domController = new DOMController(gameInstance);
-  domController.setupGame()
+  domController.setupGame();
   // console.log(domController)
   // console.log(gameInstance.player.gameboard.printBoard())
   // console.log(gameInstance.computer.gameboard.printBoard())
 }
 
 runGame();
+
+
+//To add
+// Add ending to the game
+// Add ships by hand and images for ships + UI revamping
+// Add sounds
+// AI refining - if a hit is detected it hits the nearby cells, 
+//             - if the remained cell space does it not enough for the lenght of the remanined ships do not hit on cell 
+//Readd tests
