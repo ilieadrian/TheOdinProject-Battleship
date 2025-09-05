@@ -7,8 +7,7 @@ body {
   min-height: 100vh;
 }
 
-.container,
-.gameboard {
+.container {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
@@ -123,6 +122,10 @@ button:active {
   justify-content: center;
   transition: all 0.2s;
   position: relative;
+}
+
+#ship-container-board .cell{
+  background: white;
 }
 
 .cell:hover {

@@ -5,7 +5,7 @@ export class DOMController {
 
   createEmptyGameBoard(isShipBoard = false){
     const container = document.createElement("div");
-    container.className = "gameboard player-board";
+    container.className = "gameboard";
 
     const title = document.createElement("h3");
     title.textContent = isShipBoard ? "Drag ship to board" : "Your Fleet";
@@ -20,8 +20,6 @@ export class DOMController {
         cell.className = "cell";
         cell.dataset.x = x;
         cell.dataset.y = y;
-
-  
 
         board.appendChild(cell);
       }
@@ -246,12 +244,14 @@ export class DOMController {
     const playerBoardContainer = this.createEmptyGameBoard(false)
     playerBoardContainer.id = "empty-player-board";
 
-    boardsContainer.appendChild(playerBoardContainer);
+    
 
     // Place ship container
     const shipBoardContainer = this.createEmptyGameBoard(true)
-    playerBoardContainer.id = "ship-container-board";
+    shipBoardContainer.id = "ship-container-board";
 
+    
+    boardsContainer.appendChild(playerBoardContainer);
     boardsContainer.appendChild(shipBoardContainer);
     gameContainer.appendChild(boardsContainer);
     this.updateDisplay();
