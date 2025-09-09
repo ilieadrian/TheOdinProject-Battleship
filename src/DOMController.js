@@ -3,31 +3,76 @@ export class DOMController {
     this.gameInstance = gameInstance;
   }
 
-  createEmptyGameBoard(isShipBoard = false){
+  // createEmptyGameBoard(isShipBoard = false){
+  //   const container = document.createElement("div");
+  //   container.className = "gameboard";
+
+  //   const title = document.createElement("h3");
+  //   title.textContent = isShipBoard ? "Drag ship to board" : "Your board";
+  //   container.appendChild(title);
+
+  //   const board = document.createElement("div");
+  //   board.className = "board-grid";
+
+  //   for (let y = 0; y < 10; y++) {
+  //     for (let x = 0; x < 10; x++) {
+  //       const cell = document.createElement("div");
+  //       cell.className = "cell";
+  //       cell.dataset.x = x;
+  //       cell.dataset.y = y;
+
+  //       board.appendChild(cell);
+  //     }
+  //   }
+
+  //   container.appendChild(board);
+  //   return container;
+  // }
+
+   createEmptyGameBoard(isShipBoard = false) {
     const container = document.createElement("div");
     container.className = "gameboard";
-
+    
     const title = document.createElement("h3");
-    title.textContent = isShipBoard ? "Drag ship to board" : "Your Fleet";
+    title.textContent = isShipBoard ? "Drag ships to your board" : "Your Fleet";
     container.appendChild(title);
 
-    const board = document.createElement("div");
-    board.className = "board-grid";
+    if (isShipBoard) {
+      // Add orientation toggle button for ship container
+      const orientationButton = document.createElement("button");
+      orientationButton.textContent = "Rotate Ships";
+      orientationButton.className = "orientation-btn";
+      orientationButton.addEventListener("click", () => this.toggleShipOrientation());
+      container.appendChild(orientationButton);
 
-    for (let y = 0; y < 10; y++) {
-      for (let x = 0; x < 10; x++) {
-        const cell = document.createElement("div");
-        cell.className = "cell";
-        cell.dataset.x = x;
-        cell.dataset.y = y;
+      // Create ship container instead of board grid
+      const shipContainer = this.createShipContainer();
+      container.appendChild(shipContainer);
+    } else {
+      // Create the board grid for player board
+      const board = document.createElement("div");
+      board.className = "board-grid";
+      
+      // Make board a drop zone
+      board.addEventListener("dragover", (e) => this.handleDragOver(e));
+      board.addEventListener("drop", (e) => this.handleDrop(e));
 
-        board.appendChild(cell);
+      for (let y = 0; y < 10; y++) {
+        for (let x = 0; x < 10; x++) {
+          const cell = document.createElement("div");
+          cell.className = "cell";
+          cell.dataset.x = x;
+          cell.dataset.y = y;
+          board.appendChild(cell);
+        }
       }
+      container.appendChild(board);
     }
 
-    container.appendChild(board);
     return container;
   }
+
+  
 
   createGameboard(player, isEnemy = false) {
     const container = document.createElement("div");
@@ -225,35 +270,72 @@ export class DOMController {
     this.updateDisplay();
   }
 
-  setupGame(){
-    // this.playGame()
-
+   setupGame() {
     const gameContainer = document.getElementById("game-container");
     if (!gameContainer) {
       console.error("Game container not found");
       return;
     }
 
-    // Clear existing content
+    // Reset placement state
+    // this.placedShips.clear();
+    // this.draggedShip = null;
+    // this.currentShipOrientation = 'horizontal';
+
     gameContainer.innerHTML = "";
+
+    // Add instructions
+    const instructionsDiv = document.createElement("div");
+    instructionsDiv.className = "setup-instructions";
+    instructionsDiv.innerHTML = `
+      <h2>Place Your Ships</h2>
+      <p>Drag each ship from the right panel to your board on the left. Use the "Rotate Ships" button to change orientation.</p>
+    `;
+    gameContainer.appendChild(instructionsDiv);
 
     const boardsContainer = document.createElement("div");
     boardsContainer.className = "boards-container";
 
-    // Player board
-    const playerBoardContainer = this.createEmptyGameBoard(false)
+    const playerBoardContainer = this.createEmptyGameBoard(false);
     playerBoardContainer.id = "empty-player-board";
 
-    
-
-    // Place ship container
-    const shipBoardContainer = this.createEmptyGameBoard(true)
+    const shipBoardContainer = this.createEmptyGameBoard(true);
     shipBoardContainer.id = "ship-container-board";
 
-    
     boardsContainer.appendChild(playerBoardContainer);
     boardsContainer.appendChild(shipBoardContainer);
     gameContainer.appendChild(boardsContainer);
-    this.updateDisplay();
   }
+
+  // setupGame(){
+  //   // this.playGame()
+
+  //   const gameContainer = document.getElementById("game-container");
+  //   if (!gameContainer) {
+  //     console.error("Game container not found");
+  //     return;
+  //   }
+
+  //   // Clear existing content
+  //   gameContainer.innerHTML = "";
+
+  //   const boardsContainer = document.createElement("div");
+  //   boardsContainer.className = "boards-container";
+
+  //   // Player board
+  //   const playerBoardContainer = this.createEmptyGameBoard(false)
+  //   playerBoardContainer.id = "empty-player-board";
+
+    
+
+  //   // Place ship container
+  //   const shipBoardContainer = this.createEmptyGameBoard(true)
+  //   shipBoardContainer.id = "ship-container-board";
+
+    
+  //   boardsContainer.appendChild(playerBoardContainer);
+  //   boardsContainer.appendChild(shipBoardContainer);
+  //   gameContainer.appendChild(boardsContainer);
+  //   this.updateDisplay();
+  // }
 }
