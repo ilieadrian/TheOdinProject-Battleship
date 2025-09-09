@@ -1,6 +1,9 @@
 export class DOMController {
   constructor(gameInstance) {
     this.gameInstance = gameInstance;
+    this.draggedShip = null;
+    this.currentShipOrientation = 'horizontal'; // 'horizontal' or 'vertical'
+    this.placedShips = new Set(); // Track which ships have been placed
   }
 
   // createEmptyGameBoard(isShipBoard = false){
@@ -123,6 +126,19 @@ export class DOMController {
 
     shipWrapper.appendChild(shipElement);
     return shipWrapper;
+  }
+
+  handleDragStart(e) {
+    this.draggedShip = {
+      element: e.target,
+      length: parseInt(e.target.dataset.length),
+      name: e.target.dataset.name,
+      shipId: parseInt(e.target.dataset.shipId),
+      orientation: this.currentShipOrientation
+    };
+    
+    e.target.style.opacity = '0.5';
+    console.log(`Started dragging ${this.draggedShip.name}`);
   }
 
   
