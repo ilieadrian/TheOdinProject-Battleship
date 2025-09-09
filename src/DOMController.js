@@ -137,11 +137,13 @@ export class DOMController {
       orientation: this.currentShipOrientation
     };
     
-    e.target.style.opacity = '0.5';
+    e.target.style.opacity = '0.3';
     console.log(`Started dragging ${this.draggedShip.name}`);
   }
 
-  
+  handleDragEnd(e) {
+    e.target.style.opacity = '1';
+  }
 
   createGameboard(player, isEnemy = false) {
     const container = document.createElement("div");
