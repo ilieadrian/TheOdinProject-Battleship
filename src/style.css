@@ -223,4 +223,229 @@ button:active {
   }
 }
 
+/* Ship Placement Specific Styles */
+.setup-instructions {
+  text-align: center;
+  margin: 20px 0;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+}
 
+.setup-instructions h2 {
+  margin-top: 0;
+  color: #FFD700;
+}
+
+/* Ship Container Styles */
+.ship-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  min-height: 400px;
+}
+
+.ship-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.ship-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #FFD700;
+  text-align: center;
+}
+
+/* Draggable Ship Styles */
+.draggable-ship {
+  display: flex;
+  cursor: grab;
+  transition: all 0.2s ease;
+  border: 2px solid #4682B4;
+  border-radius: 4px;
+  background: #708090;
+}
+
+.draggable-ship:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.draggable-ship:active {
+  cursor: grabbing;
+}
+
+/* Horizontal ship layout */
+.draggable-ship.horizontal {
+  flex-direction: row;
+}
+
+/* Vertical ship layout */
+.draggable-ship.vertical {
+  flex-direction: column;
+}
+
+.ship-cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #2F4F4F;
+  background: #708090;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ship-cell::after {
+  content: '⚓';
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+/* Orientation button */
+.orientation-btn {
+  background: #FF6B35;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 15px;
+  transition: background-color 0.3s;
+}
+
+.orientation-btn:hover {
+  background: #E55A2B;
+}
+
+/* Drop zone highlighting */
+.highlight-valid {
+  background: rgba(76, 175, 80, 0.7) !important;
+  border-color: #4CAF50 !important;
+  transform: scale(1.1);
+  z-index: 10;
+  position: relative;
+}
+
+.highlight-invalid {
+  background: rgba(244, 67, 54, 0.7) !important;
+  border-color: #f44336 !important;
+  transform: scale(1.1);
+  z-index: 10;
+  position: relative;
+}
+
+/* Start game button */
+.start-game-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+  transition: all 0.3s ease;
+}
+
+.start-game-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.start-game-btn:active {
+  transform: translateY(0px);
+}
+
+/* Message system */
+.game-message {
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.game-message.success {
+  background: rgba(76, 175, 80, 0.2);
+  border: 2px solid #4CAF50;
+  color: #4CAF50;
+}
+
+.game-message.error {
+  background: rgba(244, 67, 54, 0.2);
+  border: 2px solid #f44336;
+  color: #f44336;
+}
+
+.game-message.info {
+  background: rgba(33, 150, 243, 0.2);
+  border: 2px solid #2196F3;
+  color: #2196F3;
+}
+
+/* */
+
+/* Responsive adjustments for ship placement */
+@media (max-width: 768px) {
+  .boards-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .ship-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: auto;
+  }
+  
+  .ship-wrapper {
+    margin: 5px;
+  }
+  
+  .ship-cell {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .setup-instructions {
+    padding: 15px;
+  }
+  
+  .setup-instructions h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Animation for placed ships */
+.ship.placed {
+  animation: shipPlaced 0.5s ease-out;
+}
+
+@keyframes shipPlaced {
+  0% {
+    transform: scale(1.2);
+    background: #FFD700;
+  }
+  100% {
+    transform: scale(1);
+    background: #708090;
+  }
+}
+
+/* Drag preview styles */
+.draggable-ship.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg);
+}

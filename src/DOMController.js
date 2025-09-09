@@ -94,6 +94,39 @@ export class DOMController {
     return shipContainer;
   }
 
+  createDraggableShip(length, name, shipId) {
+    const shipWrapper = document.createElement("div");
+    shipWrapper.className = "ship-wrapper";
+
+    const shipLabel = document.createElement("div");
+    shipLabel.className = "ship-label";
+    shipLabel.textContent = `${name} (${length})`;
+    shipWrapper.appendChild(shipLabel);
+
+    const shipElement = document.createElement("div");
+    shipElement.className = `draggable-ship ${this.currentShipOrientation}`;
+    shipElement.draggable = true;
+    shipElement.dataset.length = length;
+    shipElement.dataset.name = name;
+    shipElement.dataset.shipId = shipId;
+
+    // Create ship cells
+    for (let i = 0; i < length; i++) {
+      const shipCell = document.createElement("div");
+      shipCell.className = "ship-cell";
+      shipElement.appendChild(shipCell);
+    }
+
+    // Add drag event listeners
+    shipElement.addEventListener("dragstart", (e) => this.handleDragStart(e));
+    shipElement.addEventListener("dragend", (e) => this.handleDragEnd(e));
+
+    shipWrapper.appendChild(shipElement);
+    return shipWrapper;
+  }
+
+  
+
   createGameboard(player, isEnemy = false) {
     const container = document.createElement("div");
     container.className = `gameboard ${isEnemy ? "enemy-board" : "player-board"}`;
