@@ -72,7 +72,27 @@ export class DOMController {
     return container;
   }
 
-  
+  createShipContainer() {
+    const shipContainer = document.createElement("div");
+    shipContainer.className = "ship-container";
+
+    // Standard Battleship ships: [length, name]
+    const ships = [
+      [5, "Carrier"],
+      [4, "Battleship"], 
+      [3, "Cruiser"],
+      [3, "Submarine"],
+      [2, "Destroyer"]
+    ];
+
+    ships.forEach((shipInfo, index) => {
+      const [length, name] = shipInfo;
+      const shipElement = this.createDraggableShip(length, name, index);
+      shipContainer.appendChild(shipElement);
+    });
+
+    return shipContainer;
+  }
 
   createGameboard(player, isEnemy = false) {
     const container = document.createElement("div");
