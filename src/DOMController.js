@@ -145,6 +145,28 @@ export class DOMController {
     e.target.style.opacity = '1';
   }
 
+  handleDragOver(e) {
+    e.preventDefault(); // Allow drop
+    
+    if (!this.draggedShip) return;
+
+    // Highlight valid drop zones
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cellSize = 35; // Assuming each cell is 35px
+    const x = Math.floor((e.clientX - rect.left) / cellSize);
+    const y = Math.floor((e.clientY - rect.top) / cellSize);
+
+    // Clear previous highlights
+    this.clearHighlights();
+
+    // Highlight cells if valid placement
+    if (this.isValidPlacement(x, y, this.draggedShip.length, this.draggedShip.orientation)) {
+      this.highlightCells(x, y, this.draggedShip.length, this.draggedShip.orientation, 'valid');
+    } else {
+      this.highlightCells(x, y, this.draggedShip.length, this.draggedShip.orientation, 'invalid');
+    }
+  }
+
   createGameboard(player, isEnemy = false) {
     const container = document.createElement("div");
     container.className = `gameboard ${isEnemy ? "enemy-board" : "player-board"}`;
