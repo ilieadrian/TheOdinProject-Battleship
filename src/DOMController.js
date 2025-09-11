@@ -152,9 +152,11 @@ export class DOMController {
 
     // Highlight valid drop zones
     const rect = e.currentTarget.getBoundingClientRect();
-    const cellSize = 35; // Assuming each cell is 35px
+    const cellSize = 35; 
     const x = Math.floor((e.clientX - rect.left) / cellSize);
     const y = Math.floor((e.clientY - rect.top) / cellSize);
+
+    console.log(x,y)
 
     // Clear previous highlights
     this.clearHighlights();
@@ -165,6 +167,76 @@ export class DOMController {
     } else {
       this.highlightCells(x, y, this.draggedShip.length, this.draggedShip.orientation, 'invalid');
     }
+  }
+
+  handleDrop(e) {
+    e.preventDefault();
+    
+    if (!this.draggedShip) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cellSize = 35;
+    const x = Math.floor((e.clientX - rect.left) / cellSize);
+    const y = Math.floor((e.clientY - rect.top) / cellSize);
+
+    console.log(`Attempting to place ${this.draggedShip.name} at (${x}, ${y})`);
+
+    if (this.isValidPlacement(x, y, this.draggedShip.length, this.draggedShip.orientation)) {
+      // Place the ship in the game logic
+      try {
+        const isHorizontal = this.draggedShip.orientation === 'horizontal';
+        this.gameInstance.getPlayer().getGameboard().placeShip(x, y, this.draggedShip.length, isHorizontal);
+        
+        // Mark ship as placed and hide it from ship container
+        this.placedShips.add(this.draggedShip.shipId);
+        this.draggedShip.element.style.display = 'none';
+        
+        // Update the board display
+        this.updatePlayerBoard();
+        
+        console.log(`Successfully placed ${this.draggedShip.name}`);
+        
+        // Check if all ships are placed
+        if (this.placedShips.size === 5) {
+          this.onAllShipsPlaced();
+        }
+        
+      } catch (error) {
+        console.error("Failed to place ship:", error.message);
+        this.showMessage("Cannot place ship here!", "error");
+      }
+    } else {
+      console.log("Invalid placement position");
+      this.showMessage("Invalid placement position!", "error");
+    }
+
+    // Clean up
+    this.clearHighlights();
+    this.draggedShip = null;
+  }
+
+
+  isValidPlacement(x, y, length, orientation) {
+    // Check bounds
+    if (orientation === 'horizontal') {
+      if (x + length > 10 || y >= 10 || x < 0 || y < 0) return false;
+    } else {
+      if (y + length > 10 || x >= 10 || x < 0 || y < 0) return false;
+    }
+
+    // Check for collisions with existing ships
+    const gameboard = this.gameInstance.getPlayer().getGameboard();
+    
+    for (let i = 0; i < length; i++) {
+      const checkX = orientation === 'horizontal' ? x + i : x;
+      const checkY = orientation === 'horizontal' ? y : y + i;
+      
+      if (gameboard.getShipAt(checkX, checkY) !== null) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   highlightCells(x, y, length, orientation, type) {
