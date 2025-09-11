@@ -61,8 +61,8 @@ export default class Gameboard {
       const placeY = isHorizontal ? y : y + i;
        console.log("placeX, placeY", placeX, placeY)
 
-      this.gameboard[placeX][placeY] = ship;
-      shipData.coordinates.push([placeX, placeY]);
+      this.gameboard[placeY][placeX] = ship;
+      shipData.coordinates.push([placeY, placeX]);
     }
 
     this.ships.push(shipData);
