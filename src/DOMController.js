@@ -265,6 +265,20 @@ export class DOMController {
     });
   }
 
+  toggleShipOrientation() {
+    this.currentShipOrientation = this.currentShipOrientation === 'horizontal' ? 'vertical' : 'horizontal';
+    
+    // Update visual orientation of all remaining ships
+    const ships = document.querySelectorAll('.draggable-ship');
+    ships.forEach(ship => {
+      if (ship.style.display !== 'none') { // Only update ships that aren't placed
+        ship.className = `draggable-ship ${this.currentShipOrientation}`;
+      }
+    });
+
+    console.log(`Ship orientation changed to: ${this.currentShipOrientation}`);
+  }
+
   updatePlayerBoard() {
     const playerBoard = document.querySelector('#empty-player-board');
     if (playerBoard) {
