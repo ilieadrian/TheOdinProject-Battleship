@@ -11,7 +11,7 @@ export default class GameController {
   }
 
   initializeGame() {
-    this.player.placeShipsRandomly();
+    // this.player.placeShipsRandomly();
     this.computer.placeShipsRandomly();
     this.currentPlayer = this.player;
     this.gameOver = false;

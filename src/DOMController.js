@@ -156,8 +156,6 @@ export class DOMController {
     const x = Math.floor((e.clientX - rect.left) / cellSize);
     const y = Math.floor((e.clientY - rect.top) / cellSize);
 
-    console.log(x,y)
-
     // Clear previous highlights
     this.clearHighlights();
 
@@ -185,6 +183,7 @@ export class DOMController {
       // Place the ship in the game logic
       try {
         const isHorizontal = this.draggedShip.orientation === 'horizontal';
+        console.log("isHorizontal", isHorizontal)
         this.gameInstance.getPlayer().getGameboard().placeShip(x, y, this.draggedShip.length, isHorizontal);
         
         // Mark ship as placed and hide it from ship container
@@ -266,6 +265,18 @@ export class DOMController {
     });
   }
 
+  updatePlayerBoard() {
+    const playerBoard = document.querySelector('#empty-player-board');
+    if (playerBoard) {
+      this.gameInstance.getPlayer().getGameboard().printBoard();
+      this.renderGameboard(
+        this.gameInstance.getPlayer().getGameboard(),
+        playerBoard,
+        true // Show ships on player board
+      );
+    }
+  }
+
   createGameboard(player, isEnemy = false) {
     const container = document.createElement("div");
     container.className = `gameboard ${isEnemy ? "enemy-board" : "player-board"}`;
@@ -340,6 +351,8 @@ export class DOMController {
 
       const ship = gameboard.getShipAt(x, y);
       const hasBeenAttacked = gameboard.hasBeenAttacked(x, y);
+
+      console.log(gameboard.printBoard())
 
       if (hasBeenAttacked) {
         if (ship) {

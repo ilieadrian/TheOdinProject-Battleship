@@ -43,6 +43,8 @@ export default class Gameboard {
       throw new Error("Invalid coordinates");
     }
 
+    console.log("placeShip isHorizontal", isHorizontal, x, y)
+
     if (!this.canPlaceShip(x, y, length, isHorizontal)) {
       throw new Error("Cannot place ship at specified location");
     }
@@ -57,6 +59,7 @@ export default class Gameboard {
     for (let i = 0; i < length; i++) {
       const placeX = isHorizontal ? x + i : x;
       const placeY = isHorizontal ? y : y + i;
+       console.log("placeX, placeY", placeX, placeY)
 
       this.gameboard[placeX][placeY] = ship;
       shipData.coordinates.push([placeX, placeY]);
