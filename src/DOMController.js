@@ -167,6 +167,33 @@ export class DOMController {
     }
   }
 
+  highlightCells(x, y, length, orientation, type) {
+    const board = document.querySelector('#empty-player-board .board-grid');
+    if (!board) return;
+
+    for (let i = 0; i < length; i++) {
+      const cellX = orientation === 'horizontal' ? x + i : x;
+      const cellY = orientation === 'horizontal' ? y : y + i;
+      
+      if (cellX >= 0 && cellX < 10 && cellY >= 0 && cellY < 10) {
+        const cell = board.querySelector(`[data-x="${cellX}"][data-y="${cellY}"]`);
+        if (cell) {
+          cell.classList.add(`highlight-${type}`);
+        }
+      }
+    }
+  }
+
+  clearHighlights() {
+    const board = document.querySelector('#empty-player-board .board-grid');
+    if (!board) return;
+    
+    const highlightedCells = board.querySelectorAll('.highlight-valid, .highlight-invalid');
+    highlightedCells.forEach(cell => {
+      cell.classList.remove('highlight-valid', 'highlight-invalid');
+    });
+  }
+
   createGameboard(player, isEnemy = false) {
     const container = document.createElement("div");
     container.className = `gameboard ${isEnemy ? "enemy-board" : "player-board"}`;
