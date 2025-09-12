@@ -299,6 +299,31 @@ export class DOMController {
     this.showMessage("All ships placed! Click 'Start Battle!' to begin.", "success");
   }
 
+   showMessage(text, type = "info") {
+    // Create or update message display
+    let messageDiv = document.getElementById("game-message");
+    if (!messageDiv) {
+      messageDiv = document.createElement("div");
+      messageDiv.id = "game-message";
+      messageDiv.className = "game-message";
+      
+      const gameContainer = document.getElementById("game-container");
+      gameContainer.insertBefore(messageDiv, gameContainer.firstChild);
+    }
+    
+    messageDiv.textContent = text;
+    messageDiv.className = `game-message ${type}`;
+    
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+      if (messageDiv) {
+        messageDiv.style.opacity = '0';
+        setTimeout(() => messageDiv.remove(), 300);
+      }
+    }, 3000);
+  }
+
+
   updatePlayerBoard() {
     const playerBoard = document.querySelector('#empty-player-board');
     if (playerBoard) {
