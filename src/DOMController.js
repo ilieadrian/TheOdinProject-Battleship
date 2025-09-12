@@ -271,12 +271,32 @@ export class DOMController {
     // Update visual orientation of all remaining ships
     const ships = document.querySelectorAll('.draggable-ship');
     ships.forEach(ship => {
-      if (ship.style.display !== 'none') { // Only update ships that aren't placed
+      if (ship.style.display !== 'none') { 
         ship.className = `draggable-ship ${this.currentShipOrientation}`;
       }
     });
 
     console.log(`Ship orientation changed to: ${this.currentShipOrientation}`);
+  }
+
+  onAllShipsPlaced() {
+    console.log("All ships placed! Ready to start game.");
+    
+    // Show start game button
+    const gameContainer = document.getElementById("game-container");
+    const startButton = document.createElement("button");
+    startButton.textContent = "Start Battle!";
+    startButton.className = "start-game-btn";
+    startButton.addEventListener("click", () => {
+      // Place computer ships randomly
+      this.gameInstance.getComputer().placeShipsRandomly();
+      
+      // Switch to game view
+      this.playGame();
+    });
+    
+    gameContainer.appendChild(startButton);
+    this.showMessage("All ships placed! Click 'Start Battle!' to begin.", "success");
   }
 
   updatePlayerBoard() {
@@ -489,7 +509,7 @@ export class DOMController {
     this.updateDisplay();
   }
 
-   setupGame() {
+  setupGame() {
     const gameContainer = document.getElementById("game-container");
     if (!gameContainer) {
       console.error("Game container not found");
