@@ -231,6 +231,13 @@ export class DOMController {
       const checkY = orientation === 'horizontal' ? y : y + i;
       
       if (gameboard.getShipAt(checkX, checkY) !== null) {
+
+                  console.log(
+            "Checking cell:",
+            checkX, checkY,
+            "=> board[", checkY, "][", checkX, "]",
+            "value:", gameboard.gameboard[checkY][checkX]
+          );
         return false;
       }
     }

@@ -30,7 +30,7 @@ export default class Gameboard {
     for (let i = 0; i < length; i++) {
       const checkX = isHorizontal ? x + i : x;
       const checkY = isHorizontal ? y : y + i;
-      if (this.gameboard[checkX][checkY] !== null) {
+      if (this.gameboard[checkY][checkX] !== null) {
         return false;
       }
     }
