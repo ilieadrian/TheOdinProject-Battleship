@@ -6,33 +6,7 @@ export class DOMController {
     this.placedShips = new Set(); // Track which ships have been placed
   }
 
-  // createEmptyGameBoard(isShipBoard = false){
-  //   const container = document.createElement("div");
-  //   container.className = "gameboard";
-
-  //   const title = document.createElement("h3");
-  //   title.textContent = isShipBoard ? "Drag ship to board" : "Your board";
-  //   container.appendChild(title);
-
-  //   const board = document.createElement("div");
-  //   board.className = "board-grid";
-
-  //   for (let y = 0; y < 10; y++) {
-  //     for (let x = 0; x < 10; x++) {
-  //       const cell = document.createElement("div");
-  //       cell.className = "cell";
-  //       cell.dataset.x = x;
-  //       cell.dataset.y = y;
-
-  //       board.appendChild(cell);
-  //     }
-  //   }
-
-  //   container.appendChild(board);
-  //   return container;
-  // }
-
-   createEmptyGameBoard(isShipBoard = false) {
+  createEmptyGameBoard(isShipBoard = false) {
     const container = document.createElement("div");
     container.className = "gameboard";
     
@@ -214,7 +188,6 @@ export class DOMController {
     this.draggedShip = null;
   }
 
-
   isValidPlacement(x, y, length, orientation) {
     // Check bounds
     if (orientation === 'horizontal') {
@@ -306,7 +279,7 @@ export class DOMController {
     this.showMessage("All ships placed! Click 'Start Battle!' to begin.", "success");
   }
 
-   showMessage(text, type = "info") {
+  showMessage(text, type = "info") {
     // Create or update message display
     let messageDiv = document.getElementById("game-message");
     if (!messageDiv) {
@@ -491,6 +464,18 @@ export class DOMController {
       console.error("Game container not found");
       return;
     }
+
+    const infoGameContainer = document.getElementById("info-game-container")
+
+    const infoGameContainerDiv = document.createElement("div");
+    infoGameContainerDiv.className = "instructions";
+    infoGameContainerDiv.innerHTML = `
+        <p>🎯 <strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
+        <p>🚢 Ships: Carrier (5), Battleship (4), Cruiser (3), Submarine (3), Destroyer (2)</p>
+        <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
+    `;
+
+    infoGameContainer.appendChild(infoGameContainerDiv);
 
     // Clear existing content
     gameContainer.innerHTML = "";
