@@ -466,6 +466,7 @@ export class DOMController {
     }
 
     const infoGameContainer = document.getElementById("info-game-container")
+    
 
     const infoGameContainerDiv = document.createElement("div");
     infoGameContainerDiv.className = "instructions";
@@ -475,7 +476,10 @@ export class DOMController {
         <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
     `;
 
-    infoGameContainer.appendChild(infoGameContainerDiv);
+    infoGameContainer.insertBefore(
+      infoGameContainerDiv,
+      document.getElementById("game-container")
+);
 
     // Clear existing content
     gameContainer.innerHTML = "";
