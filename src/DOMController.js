@@ -4,6 +4,14 @@ export class DOMController {
     this.draggedShip = null;
     this.currentShipOrientation = 'horizontal'; // 'horizontal' or 'vertical'
     this.placedShips = new Set(); // Track which ships have been placed
+    
+    this.shipImages = {
+      'Carrier': 'assets/images/carrier.svg',
+      'Battleship': 'assets/images/battleship.svg', 
+      'Cruiser': 'assets/images/cruiser.svg',
+      'Submarine': 'assets/images/submarine.svg',
+      'Destroyer': 'assets/images/destroyer.svg'
+    };
   }
 
   createEmptyGameBoard(isShipBoard = false) {
@@ -83,9 +91,12 @@ export class DOMController {
     const shipElement = document.createElement("div");
     shipElement.className = `draggable-ship ${this.currentShipOrientation}`;
     shipElement.draggable = true;
+    // shipElement.id = name;
     shipElement.dataset.length = length;
     shipElement.dataset.name = name;
     shipElement.dataset.shipId = shipId;
+
+    this.createShipImage(shipElement, name, length);
 
     // Create ship cells
     for (let i = 0; i < length; i++) {
@@ -102,6 +113,7 @@ export class DOMController {
     return shipWrapper;
   }
 
+  
   handleDragStart(e) {
     this.draggedShip = {
       element: e.target,

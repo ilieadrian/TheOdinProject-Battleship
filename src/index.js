@@ -99,9 +99,10 @@ runGame();
 
 
 //To add
-// Add ships by hand and images for ships + UI revamping / While
-//placing ships do not display how to play section
+//While placing ships do not display how to play section
 // Add sounds
+//UI revamping
 // AI refining - if a hit is detected it hits the nearby cells, 
 //             - if the remained cell space does it not enough for the lenght of the remanined ships do not hit on cell 
 //Readd tests
+//images for ships - already added
