@@ -6,11 +6,11 @@ export class DOMController {
     this.placedShips = new Set(); // Track which ships have been placed
     
     this.shipImages = {
-      'Carrier': 'assets/images/carrier.svg',
-      'Battleship': 'assets/images/battleship.svg', 
-      'Cruiser': 'assets/images/cruiser.svg',
-      'Submarine': 'assets/images/submarine.svg',
-      'Destroyer': 'assets/images/destroyer.svg'
+      Carrier: "assets/images/carrier.svg",
+      Battleship: "assets/images/battleship.svg",
+      Cruiser: "assets/images/cruiser.svg",
+      Submarine: "assets/images/submarine.svg",
+      Destroyer: "assets/images/destroyer.svg",
     };
   }
 
@@ -96,8 +96,6 @@ export class DOMController {
     shipElement.dataset.name = name;
     shipElement.dataset.shipId = shipId;
 
-    this.createShipImage(shipElement, name, length);
-
     // Create ship cells
     for (let i = 0; i < length; i++) {
       const shipCell = document.createElement("div");
@@ -113,7 +111,6 @@ export class DOMController {
     return shipWrapper;
   }
 
-  
   handleDragStart(e) {
     this.draggedShip = {
       element: e.target,
@@ -478,9 +475,12 @@ export class DOMController {
     }
 
     const infoGameContainer = document.getElementById("info-game-container")
-    
-
-    const infoGameContainerDiv = document.createElement("div");
+    if (infoGameContainer) {
+  // Remove any existing instructions
+  const existingInstructions = infoGameContainer.querySelectorAll('.instructions');
+  existingInstructions.forEach(instruction => instruction.remove());
+  
+  const infoGameContainerDiv = document.createElement("div");
     infoGameContainerDiv.className = "instructions";
     infoGameContainerDiv.innerHTML = `
         <p>🎯 <strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
@@ -491,7 +491,13 @@ export class DOMController {
     infoGameContainer.insertBefore(
       infoGameContainerDiv,
       document.getElementById("game-container")
-);
+  );
+}
+
+    
+    
+
+    
 
     // Clear existing content
     gameContainer.innerHTML = "";
