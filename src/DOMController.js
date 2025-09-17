@@ -22,13 +22,20 @@ export class DOMController {
     title.textContent = isShipBoard ? "Drag ships to your board" : "Your Fleet";
     container.appendChild(title);
 
+    
+
     if (isShipBoard) {
       // Add orientation toggle button for ship container
+      const buttonContainer = document.createElement("div")
+    buttonContainer.id = "button-container";
+    container.appendChild(buttonContainer);
+    
       const orientationButton = document.createElement("button");
       orientationButton.textContent = "Rotate Ships";
       orientationButton.className = "orientation-btn";
+      orientationButton.id = "orientation-btn";
       orientationButton.addEventListener("click", () => this.toggleShipOrientation());
-      container.appendChild(orientationButton);
+      buttonContainer.appendChild(orientationButton);
 
       // Create ship container instead of board grid
       const shipContainer = this.createShipContainer();
@@ -272,6 +279,8 @@ export class DOMController {
     console.log("All ships placed! Ready to start game.");
     
     // Show start game button
+    const orientationBtn = document.getElementById("orientation-btn")
+    const buttonContainer = document.getElementById("button-container")
     const gameContainer = document.getElementById("game-container");
     const startButton = document.createElement("button");
     startButton.textContent = "Start Battle!";
@@ -283,8 +292,10 @@ export class DOMController {
       // Switch to game view
       this.playGame();
     });
-    
-    gameContainer.appendChild(startButton);
+
+
+    orientationBtn.style.display = "none"
+    buttonContainer.appendChild(startButton);
     this.showMessage("All ships placed! Click 'Start Battle!' to begin.", "success");
   }
 
@@ -493,11 +504,6 @@ export class DOMController {
       document.getElementById("game-container")
   );
 }
-
-    
-    
-
-    
 
     // Clear existing content
     gameContainer.innerHTML = "";
