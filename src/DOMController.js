@@ -65,6 +65,7 @@ export class DOMController {
   createShipContainer() {
     const shipContainer = document.createElement("div");
     shipContainer.className = "ship-container";
+    shipContainer.id = "ship-container";
 
     // Standard Battleship ships: [length, name]
     const ships = [
@@ -281,6 +282,7 @@ export class DOMController {
     const orientationBtn = document.getElementById("orientation-btn")
     const buttonContainer = document.getElementById("button-container")
     const gameContainer = document.getElementById("game-container");
+    const shipContainer = document.getElementById("ship-container")
     const startButton = document.createElement("button");
     startButton.textContent = "Start Battle!";
     startButton.className = "start-game-btn";
@@ -294,7 +296,7 @@ export class DOMController {
 
 
     orientationBtn.style.display = "none"
-    buttonContainer.appendChild(startButton);
+    shipContainer.appendChild(startButton);
     this.showMessage("All ships placed! Click 'Start Battle!' to begin.", "success");
   }
 
