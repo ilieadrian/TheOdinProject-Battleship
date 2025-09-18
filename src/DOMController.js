@@ -22,14 +22,12 @@ export class DOMController {
     title.textContent = isShipBoard ? "Drag ships to your board" : "Your Fleet";
     container.appendChild(title);
 
-    
-
     if (isShipBoard) {
       // Add orientation toggle button for ship container
       const buttonContainer = document.createElement("div")
-    buttonContainer.id = "button-container";
-    container.appendChild(buttonContainer);
-    
+      buttonContainer.id = "button-container";
+      container.appendChild(buttonContainer);
+
       const orientationButton = document.createElement("button");
       orientationButton.textContent = "Rotate Ships";
       orientationButton.className = "orientation-btn";
@@ -70,33 +68,34 @@ export class DOMController {
 
     // Standard Battleship ships: [length, name]
     const ships = [
-      [5, "Carrier"],
-      [4, "Battleship"], 
-      [3, "Cruiser"],
-      [3, "Submarine"],
-      [2, "Destroyer"]
+      [5, "Carrier", "ship1"],
+      [4, "Battleship", "ship2"], 
+      [2, "Destroyer", "ship3"],
+      [3, "Cruiser", "ship4"],
+      [3, "Submarine", "ship5"]
+      
     ];
 
     ships.forEach((shipInfo, index) => {
-      const [length, name] = shipInfo;
-      const shipElement = this.createDraggableShip(length, name, index);
+      const [length, name, className] = shipInfo;
+      const shipElement = this.createDraggableShip(length, name, className, index);
       shipContainer.appendChild(shipElement);
     });
 
     return shipContainer;
   }
 
-  createDraggableShip(length, name, shipId) {
+  createDraggableShip(length, name, className, shipId) {
     const shipWrapper = document.createElement("div");
     shipWrapper.className = "ship-wrapper";
 
     const shipLabel = document.createElement("div");
     shipLabel.className = "ship-label";
     shipLabel.textContent = `${name} (${length})`;
-    shipWrapper.appendChild(shipLabel);
+    // shipWrapper.appendChild(shipLabel);
 
     const shipElement = document.createElement("div");
-    shipElement.className = `draggable-ship ${this.currentShipOrientation}`;
+    shipElement.className = `draggable-ship ${this.currentShipOrientation} ${className}`;
     shipElement.draggable = true;
     // shipElement.id = name;
     shipElement.dataset.length = length;
