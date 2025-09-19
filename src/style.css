@@ -42,6 +42,8 @@ button:active {
   transform: translateY(1px);
 }
 
+
+
 .game-status {
   font-size: 1.2rem;
   font-weight: bold;
@@ -341,6 +343,11 @@ button:active {
 
 .orientation-btn:hover {
   background: #E55A2B;
+}
+
+.orientation-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Drop zone highlighting */

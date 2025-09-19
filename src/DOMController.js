@@ -295,7 +295,7 @@ export class DOMController {
     });
 
 
-    orientationBtn.style.display = "none"
+    orientationBtn.disabled = true;
     shipContainer.appendChild(startButton);
     this.showMessage("All ships placed! Click 'Start Battle!' to begin.", "success");
   }
