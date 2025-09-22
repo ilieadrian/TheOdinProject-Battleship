@@ -69,7 +69,6 @@ export class DOMController {
     shipContainer.className = "ship-container";
     shipContainer.id = "ship-container";
 
-    // Standard Battleship ships: [length, name]
     const ships = [
       [5, "Carrier", "ship1"],
       [4, "Battleship", "ship2"],
@@ -246,7 +245,7 @@ export class DOMController {
       if (y + length > 10 || x >= 10 || x < 0 || y < 0) return false;
     }
 
-     return true;
+      return true;
   }
 
   highlightCells(x, y, length, orientation, type) {
@@ -298,10 +297,7 @@ export class DOMController {
   onAllShipsPlaced() {
     console.log("All ships placed! Ready to start game.");
 
-    // Show start game button
     const orientationBtn = document.getElementById("orientation-btn");
-    const buttonContainer = document.getElementById("button-container");
-    const gameContainer = document.getElementById("game-container");
     const shipContainer = document.getElementById("ship-container");
     const startButton = document.createElement("button");
     startButton.textContent = "Start Battle!";
@@ -484,7 +480,6 @@ export class DOMController {
       statusElement.className = "game-status game-over";
 
       const newGameButton = document.createElement("button");
-      console.log(newGameButton);
       newGameButton.textContent += "";
       newGameButton.textContent += "Restart Game";
     } else {
@@ -518,9 +513,11 @@ export class DOMController {
       infoGameContainerDiv.className = "instructions";
       infoGameContainerDiv.innerHTML = `
         <p>🎯 <strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
-        <p>🚢 Ships: Carrier (5), Battleship (4), Cruiser (3), Submarine (3), Destroyer (2)</p>
         <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
     `;
+
+    //        <p>🚢 Ships: Carrier (5), Battleship (4), Cruiser (3), Submarine (3), Destroyer (2)</p>
+
 
       infoGameContainer.insertBefore(
         infoGameContainerDiv,
@@ -545,7 +542,6 @@ export class DOMController {
     newGameButton.id = "new-game-btn";
     newGameButton.addEventListener("click", () => {
       this.gameInstance.resetGame();
-      // this.gameInstance.runGame();
     });
 
     controlsDiv.appendChild(newGameButton);
