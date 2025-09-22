@@ -2,9 +2,9 @@ export class DOMController {
   constructor(gameInstance) {
     this.gameInstance = gameInstance;
     this.draggedShip = null;
-    this.currentShipOrientation = 'horizontal'; // 'horizontal' or 'vertical'
+    this.currentShipOrientation = "horizontal"; // 'horizontal' or 'vertical'
     this.placedShips = new Set(); // Track which ships have been placed
-    
+
     this.shipImages = {
       Carrier: "assets/images/carrier.svg",
       Battleship: "assets/images/battleship.svg",
@@ -17,14 +17,14 @@ export class DOMController {
   createEmptyGameBoard(isShipBoard = false) {
     const container = document.createElement("div");
     container.className = "gameboard";
-    
+
     const title = document.createElement("h3");
     title.textContent = isShipBoard ? "Drag ships to your board" : "Your Fleet";
     container.appendChild(title);
 
     if (isShipBoard) {
       // Add orientation toggle button for ship container
-      const buttonContainer = document.createElement("div")
+      const buttonContainer = document.createElement("div");
       buttonContainer.id = "button-container";
       container.appendChild(buttonContainer);
 
@@ -32,7 +32,9 @@ export class DOMController {
       orientationButton.textContent = "Rotate Ships";
       orientationButton.className = "orientation-btn";
       orientationButton.id = "orientation-btn";
-      orientationButton.addEventListener("click", () => this.toggleShipOrientation());
+      orientationButton.addEventListener("click", () =>
+        this.toggleShipOrientation(),
+      );
       buttonContainer.appendChild(orientationButton);
 
       // Create ship container instead of board grid
@@ -42,7 +44,7 @@ export class DOMController {
       // Create the board grid for player board
       const board = document.createElement("div");
       board.className = "board-grid";
-      
+
       // Make board a drop zone
       board.addEventListener("dragover", (e) => this.handleDragOver(e));
       board.addEventListener("drop", (e) => this.handleDrop(e));
@@ -70,16 +72,20 @@ export class DOMController {
     // Standard Battleship ships: [length, name]
     const ships = [
       [5, "Carrier", "ship1"],
-      [4, "Battleship", "ship2"], 
+      [4, "Battleship", "ship2"],
       [2, "Destroyer", "ship3"],
       [3, "Cruiser", "ship4"],
-      [3, "Submarine", "ship5"]
-      
+      [3, "Submarine", "ship5"],
     ];
 
     ships.forEach((shipInfo, index) => {
       const [length, name, className] = shipInfo;
-      const shipElement = this.createDraggableShip(length, name, className, index);
+      const shipElement = this.createDraggableShip(
+        length,
+        name,
+        className,
+        index,
+      );
       shipContainer.appendChild(shipElement);
     });
 
@@ -124,25 +130,25 @@ export class DOMController {
       length: parseInt(e.target.dataset.length),
       name: e.target.dataset.name,
       shipId: parseInt(e.target.dataset.shipId),
-      orientation: this.currentShipOrientation
+      orientation: this.currentShipOrientation,
     };
-    
-    e.target.style.opacity = '0.3';
+
+    e.target.style.opacity = "0.3";
     console.log(`Started dragging ${this.draggedShip.name}`);
   }
 
   handleDragEnd(e) {
-    e.target.style.opacity = '1';
+    e.target.style.opacity = "1";
   }
 
   handleDragOver(e) {
     e.preventDefault(); // Allow drop
-    
+
     if (!this.draggedShip) return;
 
     // Highlight valid drop zones
     const rect = e.currentTarget.getBoundingClientRect();
-    const cellSize = 35; 
+    const cellSize = 35;
     const x = Math.floor((e.clientX - rect.left) / cellSize);
     const y = Math.floor((e.clientY - rect.top) / cellSize);
 
@@ -150,16 +156,35 @@ export class DOMController {
     this.clearHighlights();
 
     // Highlight cells if valid placement
-    if (this.isValidPlacement(x, y, this.draggedShip.length, this.draggedShip.orientation)) {
-      this.highlightCells(x, y, this.draggedShip.length, this.draggedShip.orientation, 'valid');
+    if (
+      this.isValidPlacement(
+        x,
+        y,
+        this.draggedShip.length,
+        this.draggedShip.orientation,
+      )
+    ) {
+      this.highlightCells(
+        x,
+        y,
+        this.draggedShip.length,
+        this.draggedShip.orientation,
+        "valid",
+      );
     } else {
-      this.highlightCells(x, y, this.draggedShip.length, this.draggedShip.orientation, 'invalid');
+      this.highlightCells(
+        x,
+        y,
+        this.draggedShip.length,
+        this.draggedShip.orientation,
+        "invalid",
+      );
     }
   }
 
   handleDrop(e) {
     e.preventDefault();
-    
+
     if (!this.draggedShip) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
@@ -169,27 +194,36 @@ export class DOMController {
 
     console.log(`Attempting to place ${this.draggedShip.name} at (${x}, ${y})`);
 
-    if (this.isValidPlacement(x, y, this.draggedShip.length, this.draggedShip.orientation)) {
+    if (
+      this.isValidPlacement(
+        x,
+        y,
+        this.draggedShip.length,
+        this.draggedShip.orientation,
+      )
+    ) {
       // Place the ship in the game logic
       try {
-        const isHorizontal = this.draggedShip.orientation === 'horizontal';
-        console.log("isHorizontal", isHorizontal)
-        this.gameInstance.getPlayer().getGameboard().placeShip(x, y, this.draggedShip.length, isHorizontal);
-        
+        const isHorizontal = this.draggedShip.orientation === "horizontal";
+        console.log("isHorizontal", isHorizontal);
+        this.gameInstance
+          .getPlayer()
+          .getGameboard()
+          .placeShip(x, y, this.draggedShip.length, isHorizontal);
+
         // Mark ship as placed and hide it from ship container
         this.placedShips.add(this.draggedShip.shipId);
-        this.draggedShip.element.style.display = 'none';
-        
+        this.draggedShip.element.style.display = "none";
+
         // Update the board display
         this.updatePlayerBoard();
-        
+
         console.log(`Successfully placed ${this.draggedShip.name}`);
-        
+
         // Check if all ships are placed
         if (this.placedShips.size === 5) {
           this.onAllShipsPlaced();
         }
-        
       } catch (error) {
         console.error("Failed to place ship:", error.message);
         this.showMessage("Cannot place ship here!", "error");
@@ -206,44 +240,27 @@ export class DOMController {
 
   isValidPlacement(x, y, length, orientation) {
     // Check bounds
-    if (orientation === 'horizontal') {
+    if (orientation === "horizontal") {
       if (x + length > 10 || y >= 10 || x < 0 || y < 0) return false;
     } else {
       if (y + length > 10 || x >= 10 || x < 0 || y < 0) return false;
     }
 
-    // Check for collisions with existing ships
-    const gameboard = this.gameInstance.getPlayer().getGameboard();
-    
-    for (let i = 0; i < length; i++) {
-      const checkX = orientation === 'horizontal' ? x + i : x;
-      const checkY = orientation === 'horizontal' ? y : y + i;
-      
-      if (gameboard.getShipAt(checkX, checkY) !== null) {
-
-                  console.log(
-            "Checking cell:",
-            checkX, checkY,
-            "=> board[", checkY, "][", checkX, "]",
-            "value:", gameboard.gameboard[checkY][checkX]
-          );
-        return false;
-      }
-    }
-
-    return true;
+     return true;
   }
 
   highlightCells(x, y, length, orientation, type) {
-    const board = document.querySelector('#empty-player-board .board-grid');
+    const board = document.querySelector("#empty-player-board .board-grid");
     if (!board) return;
 
     for (let i = 0; i < length; i++) {
-      const cellX = orientation === 'horizontal' ? x + i : x;
-      const cellY = orientation === 'horizontal' ? y : y + i;
-      
+      const cellX = orientation === "horizontal" ? x + i : x;
+      const cellY = orientation === "horizontal" ? y : y + i;
+
       if (cellX >= 0 && cellX < 10 && cellY >= 0 && cellY < 10) {
-        const cell = board.querySelector(`[data-x="${cellX}"][data-y="${cellY}"]`);
+        const cell = board.querySelector(
+          `[data-x="${cellX}"][data-y="${cellY}"]`,
+        );
         if (cell) {
           cell.classList.add(`highlight-${type}`);
         }
@@ -252,22 +269,25 @@ export class DOMController {
   }
 
   clearHighlights() {
-    const board = document.querySelector('#empty-player-board .board-grid');
+    const board = document.querySelector("#empty-player-board .board-grid");
     if (!board) return;
-    
-    const highlightedCells = board.querySelectorAll('.highlight-valid, .highlight-invalid');
-    highlightedCells.forEach(cell => {
-      cell.classList.remove('highlight-valid', 'highlight-invalid');
+
+    const highlightedCells = board.querySelectorAll(
+      ".highlight-valid, .highlight-invalid",
+    );
+    highlightedCells.forEach((cell) => {
+      cell.classList.remove("highlight-valid", "highlight-invalid");
     });
   }
 
   toggleShipOrientation() {
-    this.currentShipOrientation = this.currentShipOrientation === 'horizontal' ? 'vertical' : 'horizontal';
-    
+    this.currentShipOrientation =
+      this.currentShipOrientation === "horizontal" ? "vertical" : "horizontal";
+
     // Update visual orientation of all remaining ships
-    const ships = document.querySelectorAll('.draggable-ship');
-    ships.forEach(ship => {
-      if (ship.style.display !== 'none') { 
+    const ships = document.querySelectorAll(".draggable-ship");
+    ships.forEach((ship) => {
+      if (ship.style.display !== "none") {
         ship.className = `draggable-ship ${this.currentShipOrientation}`;
       }
     });
@@ -277,27 +297,29 @@ export class DOMController {
 
   onAllShipsPlaced() {
     console.log("All ships placed! Ready to start game.");
-    
+
     // Show start game button
-    const orientationBtn = document.getElementById("orientation-btn")
-    const buttonContainer = document.getElementById("button-container")
+    const orientationBtn = document.getElementById("orientation-btn");
+    const buttonContainer = document.getElementById("button-container");
     const gameContainer = document.getElementById("game-container");
-    const shipContainer = document.getElementById("ship-container")
+    const shipContainer = document.getElementById("ship-container");
     const startButton = document.createElement("button");
     startButton.textContent = "Start Battle!";
     startButton.className = "start-game-btn";
     startButton.addEventListener("click", () => {
       // Place computer ships randomly
       this.gameInstance.getComputer().placeShipsRandomly();
-      
+
       // Switch to game view
       this.playGame();
     });
 
-
     orientationBtn.disabled = true;
     shipContainer.appendChild(startButton);
-    this.showMessage("All ships placed! Click 'Start Battle!' to begin.", "success");
+    this.showMessage(
+      "All ships placed! Click 'Start Battle!' to begin.",
+      "success",
+    );
   }
 
   showMessage(text, type = "info") {
@@ -307,32 +329,31 @@ export class DOMController {
       messageDiv = document.createElement("div");
       messageDiv.id = "game-message";
       messageDiv.className = "game-message";
-      
+
       const gameContainer = document.getElementById("game-container");
       gameContainer.insertBefore(messageDiv, gameContainer.firstChild);
     }
-    
+
     messageDiv.textContent = text;
     messageDiv.className = `game-message ${type}`;
-    
+
     // Auto-hide after 3 seconds
     setTimeout(() => {
       if (messageDiv) {
-        messageDiv.style.opacity = '0';
+        messageDiv.style.opacity = "0";
         setTimeout(() => messageDiv.remove(), 300);
       }
     }, 3000);
   }
 
-
   updatePlayerBoard() {
-    const playerBoard = document.querySelector('#empty-player-board');
+    const playerBoard = document.querySelector("#empty-player-board");
     if (playerBoard) {
       this.gameInstance.getPlayer().getGameboard().printBoard();
       this.renderGameboard(
         this.gameInstance.getPlayer().getGameboard(),
         playerBoard,
-        true // Show ships on player board
+        true, // Show ships on player board
       );
     }
   }
@@ -412,7 +433,7 @@ export class DOMController {
       const ship = gameboard.getShipAt(x, y);
       const hasBeenAttacked = gameboard.hasBeenAttacked(x, y);
 
-      console.log(gameboard.printBoard())
+      console.log(gameboard.printBoard());
 
       if (hasBeenAttacked) {
         if (ship) {
@@ -463,7 +484,7 @@ export class DOMController {
       statusElement.className = "game-status game-over";
 
       const newGameButton = document.createElement("button");
-      console.log(newGameButton)
+      console.log(newGameButton);
       newGameButton.textContent += "";
       newGameButton.textContent += "Restart Game";
     } else {
@@ -486,25 +507,26 @@ export class DOMController {
       return;
     }
 
-    const infoGameContainer = document.getElementById("info-game-container")
+    const infoGameContainer = document.getElementById("info-game-container");
     if (infoGameContainer) {
-  // Remove any existing instructions
-  const existingInstructions = infoGameContainer.querySelectorAll('.instructions');
-  existingInstructions.forEach(instruction => instruction.remove());
-  
-  const infoGameContainerDiv = document.createElement("div");
-    infoGameContainerDiv.className = "instructions";
-    infoGameContainerDiv.innerHTML = `
+      // Remove any existing instructions
+      const existingInstructions =
+        infoGameContainer.querySelectorAll(".instructions");
+      existingInstructions.forEach((instruction) => instruction.remove());
+
+      const infoGameContainerDiv = document.createElement("div");
+      infoGameContainerDiv.className = "instructions";
+      infoGameContainerDiv.innerHTML = `
         <p>🎯 <strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
         <p>🚢 Ships: Carrier (5), Battleship (4), Cruiser (3), Submarine (3), Destroyer (2)</p>
         <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
     `;
 
-    infoGameContainer.insertBefore(
-      infoGameContainerDiv,
-      document.getElementById("game-container")
-  );
-}
+      infoGameContainer.insertBefore(
+        infoGameContainerDiv,
+        document.getElementById("game-container"),
+      );
+    }
 
     // Clear existing content
     gameContainer.innerHTML = "";
@@ -523,7 +545,7 @@ export class DOMController {
     newGameButton.id = "new-game-btn";
     newGameButton.addEventListener("click", () => {
       this.gameInstance.resetGame();
-      this.playGame();
+      // this.gameInstance.runGame();
     });
 
     controlsDiv.appendChild(newGameButton);
@@ -556,6 +578,7 @@ export class DOMController {
   }
 
   setupGame() {
+    console.log("Setup game")
     const gameContainer = document.getElementById("game-container");
     if (!gameContainer) {
       console.error("Game container not found");
@@ -563,9 +586,10 @@ export class DOMController {
     }
 
     // Reset placement state
-    // this.placedShips.clear();
-    // this.draggedShip = null;
-    // this.currentShipOrientation = 'horizontal';
+    this.placedShips.clear();
+    this.draggedShip = null;
+    this.currentShipOrientation = "horizontal";
+    //
 
     gameContainer.innerHTML = "";
 
@@ -591,36 +615,4 @@ export class DOMController {
     boardsContainer.appendChild(shipBoardContainer);
     gameContainer.appendChild(boardsContainer);
   }
-
-  // setupGame(){
-  //   // this.playGame()
-
-  //   const gameContainer = document.getElementById("game-container");
-  //   if (!gameContainer) {
-  //     console.error("Game container not found");
-  //     return;
-  //   }
-
-  //   // Clear existing content
-  //   gameContainer.innerHTML = "";
-
-  //   const boardsContainer = document.createElement("div");
-  //   boardsContainer.className = "boards-container";
-
-  //   // Player board
-  //   const playerBoardContainer = this.createEmptyGameBoard(false)
-  //   playerBoardContainer.id = "empty-player-board";
-
-    
-
-  //   // Place ship container
-  //   const shipBoardContainer = this.createEmptyGameBoard(true)
-  //   shipBoardContainer.id = "ship-container-board";
-
-    
-  //   boardsContainer.appendChild(playerBoardContainer);
-  //   boardsContainer.appendChild(shipBoardContainer);
-  //   gameContainer.appendChild(boardsContainer);
-  //   this.updateDisplay();
-  // }
 }

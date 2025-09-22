@@ -28,7 +28,7 @@ export default class GameController {
     if (this.computer.getGameboard().allShipsSunk()) {
       this.gameOver = true;
       this.winner = this.player;
-      console.log("Game OVER - Winner", this.winner)
+      console.log("Game OVER - Winner", this.winner);
     }
 
     this.switchTurns(); // <--- always switch
@@ -45,7 +45,7 @@ export default class GameController {
     if (this.player.getGameboard().allShipsSunk()) {
       this.gameOver = true;
       this.winner = this.computer;
-      console.log("Game OVER - Winner", this.winner)
+      console.log("Game OVER - Winner", this.winner);
     }
 
     this.switchTurns(); // <--- always switch
@@ -79,13 +79,20 @@ export default class GameController {
   }
 
   resetGame() {
+    
     this.player = new Player("Player", false);
     this.computer = new Player("Computer", true);
-    this.initializeGame();
+
+    //
+    this.gameOver = false;
+    this.winner = null;
+    //
+    runGame()
   }
 }
 
 function runGame() {
+  console.log("Run game fired")
   const gameInstance = new GameController();
   gameInstance.initializeGame();
   const domController = new DOMController(gameInstance);
@@ -97,12 +104,11 @@ function runGame() {
 
 runGame();
 
-
 //To add
 //While placing ships do not display how to play section
 // Add sounds
 //UI revamping
-// AI refining - if a hit is detected it hits the nearby cells, 
-//             - if the remained cell space does it not enough for the lenght of the remanined ships do not hit on cell 
+// AI refining - if a hit is detected it hits the nearby cells,
+//             - if the remained cell space does it not enough for the lenght of the remanined ships do not hit on cell
 //Readd tests
-//images for ships - already added
+//images for ships - already added in folder, needs to be added in UI

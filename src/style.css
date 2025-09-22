@@ -42,8 +42,6 @@ button:active {
   transform: translateY(1px);
 }
 
-
-
 .game-status {
   font-size: 1.2rem;
   font-weight: bold;
@@ -98,7 +96,6 @@ button:active {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-
 .gameboard h3 {
   margin-top: 0;
   font-size: 1.4rem;
@@ -116,7 +113,6 @@ button:active {
   border-radius: 8px;
 }
 
-
 .cell {
   width: 35px;
   height: 35px;
@@ -129,7 +125,7 @@ button:active {
   position: relative;
 }
 
-#ship-container-board .cell{
+#ship-container-board .cell {
   background: white;
 }
 
@@ -239,14 +235,14 @@ button:active {
 
 .setup-instructions h2 {
   margin-top: 0;
-  color: #FFD700;
+  color: #ffd700;
 }
 
 /* Ship Container Styles */
 .ship-container {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: 140px 140px;  
+  grid-template-rows: 140px 140px;
   justify-items: center;
   align-items: center;
   gap: 15px;
@@ -255,20 +251,38 @@ button:active {
   border-radius: 10px;
   height: 305px;
   width: 368px;
-  place-content: center; 
+  place-content: center;
   place-items: center;
 }
 
-.ship-wrapper:nth-child(1) { grid-column: 3 / 5; grid-row: 1; } 
-.ship-wrapper:nth-child(2) { grid-column: 7 / 10; grid-row: 1; } 
+.ship-wrapper:nth-child(1) {
+  grid-column: 3 / 5;
+  grid-row: 1;
+}
+.ship-wrapper:nth-child(2) {
+  grid-column: 7 / 10;
+  grid-row: 1;
+}
 
-.ship-wrapper:nth-child(3) { grid-column: 2 / 4; grid-row: 2; } 
-.ship-wrapper:nth-child(4) { grid-column: 5 / 7; grid-row: 2; } 
-.ship-wrapper:nth-child(5) { grid-column: 8 / 10; grid-row: 2; } 
-.start-game-btn {grid-column: 3/ 9; grid-row: 1 / 3;}
+.ship-wrapper:nth-child(3) {
+  grid-column: 2 / 4;
+  grid-row: 2;
+}
+.ship-wrapper:nth-child(4) {
+  grid-column: 5 / 7;
+  grid-row: 2;
+}
+.ship-wrapper:nth-child(5) {
+  grid-column: 8 / 10;
+  grid-row: 2;
+}
+.start-game-btn {
+  grid-column: 3/ 9;
+  grid-row: 1 / 3;
+}
 
 .ship-wrapper {
-  display: flex;          /* keeps label + ship aligned */
+  display: flex; /* keeps label + ship aligned */
   flex-direction: column; /* label above ship */
   align-items: center;
   justify-content: center;
@@ -276,11 +290,10 @@ button:active {
   height: 100%;
 }
 
-
 .ship-label {
   font-size: 12px;
   font-weight: bold;
-  color: #FFD700;
+  color: #ffd700;
   text-align: center;
 }
 
@@ -289,7 +302,7 @@ button:active {
   display: flex;
   cursor: grab;
   transition: all 0.2s ease;
-  border: 2px solid #4682B4;
+  border: 2px solid #4682b4;
   border-radius: 4px;
   background: #708090;
 }
@@ -316,7 +329,7 @@ button:active {
 .ship-cell {
   width: 30px;
   height: 30px;
-  border: 1px solid #2F4F4F;
+  border: 1px solid #2f4f4f;
   background: #708090;
   display: flex;
   align-items: center;
@@ -324,14 +337,14 @@ button:active {
 }
 
 .ship-cell::after {
-  content: '⚓';
+  content: "⚓";
   font-size: 16px;
   opacity: 0.7;
 }
 
 /* Orientation button */
 .orientation-btn {
-  background: #FF6B35;
+  background: #ff6b35;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -343,7 +356,7 @@ button:active {
 }
 
 .orientation-btn:hover {
-  background: #E55A2B;
+  background: #e55a2b;
 }
 
 .orientation-btn:disabled {
@@ -354,7 +367,7 @@ button:active {
 /* Drop zone highlighting */
 .highlight-valid {
   background: rgba(76, 175, 80, 0.7) !important;
-  border-color: #4CAF50 !important;
+  border-color: #4caf50 !important;
   transform: scale(1.1);
   z-index: 10;
   position: relative;
@@ -370,7 +383,7 @@ button:active {
 
 /* Start game button */
 .start-game-btn {
-  background: linear-gradient(135deg, #4CAF50, #45a049);
+  background: linear-gradient(135deg, #4caf50, #45a049);
   color: white;
   border: none;
   padding: 15px 30px;
@@ -405,8 +418,8 @@ button:active {
 
 .game-message.success {
   background: rgba(76, 175, 80, 0.2);
-  border: 2px solid #4CAF50;
-  color: #4CAF50;
+  border: 2px solid #4caf50;
+  color: #4caf50;
 }
 
 .game-message.error {
@@ -417,10 +430,9 @@ button:active {
 
 .game-message.info {
   background: rgba(33, 150, 243, 0.2);
-  border: 2px solid #2196F3;
-  color: #2196F3;
+  border: 2px solid #2196f3;
+  color: #2196f3;
 }
-
 
 /* Responsive adjustments for ship placement */
 @media (max-width: 768px) {
@@ -428,27 +440,27 @@ button:active {
     flex-direction: column;
     gap: 20px;
   }
-  
+
   .ship-container {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     min-height: auto;
   }
-  
+
   .ship-wrapper {
     margin: 5px;
   }
-  
+
   .ship-cell {
     width: 25px;
     height: 25px;
   }
-  
+
   .setup-instructions {
     padding: 15px;
   }
-  
+
   .setup-instructions h2 {
     font-size: 1.5rem;
   }
@@ -462,7 +474,7 @@ button:active {
 @keyframes shipPlaced {
   0% {
     transform: scale(1.2);
-    background: #FFD700;
+    background: #ffd700;
   }
   100% {
     transform: scale(1);
@@ -477,7 +489,3 @@ button:active {
 }
 
 /* // */
-
-
-
-
