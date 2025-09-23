@@ -506,7 +506,7 @@ export class DOMController {
     if (infoGameContainer) {
       // Remove any existing instructions
       const existingInstructions =
-        infoGameContainer.querySelectorAll(".instructions");
+      infoGameContainer.querySelectorAll(".instructions");
       existingInstructions.forEach((instruction) => instruction.remove());
 
       const infoGameContainerDiv = document.createElement("div");

@@ -79,7 +79,6 @@ export default class GameController {
   }
 
   resetGame() {
-    
     this.player = new Player("Player", false);
     this.computer = new Player("Computer", true);
 
@@ -87,12 +86,12 @@ export default class GameController {
     this.gameOver = false;
     this.winner = null;
     //
-    runGame()
+    runGame();
   }
 }
 
 function runGame() {
-  console.log("Run game fired")
+  console.log("Run game fired");
   const gameInstance = new GameController();
   gameInstance.initializeGame();
   const domController = new DOMController(gameInstance);
