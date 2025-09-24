@@ -13,6 +13,13 @@ export class DOMController {
       Submarine: "assets/images/submarine.svg",
       Destroyer: "assets/images/destroyer.svg",
     };
+
+    this.sounds = {
+      shot: new Audio("assets/sounds/cannon-shot.mp3"),
+      hit: new Audio("assets/sounds/hit.mp3"),
+      miss: new Audio("assets/sounds/water-splash-miss.mp3"),
+      sink: new Audio("assets/sounds/ship-sinked.mp3"),
+    };
   }
 
   soundControl() {
@@ -405,6 +412,28 @@ export class DOMController {
     container.appendChild(board);
     return container;
   }
+
+  playAttackSounds(result) {
+  if (!this.soundIsOn) return;
+
+  // Always play cannon shot
+  this.sounds.shot.currentTime = 0;
+  this.sounds.shot.play();
+
+  // Outcome sounds
+  if (result.hit) {
+    if (result.sunk) {
+      this.sounds.sink.currentTime = 0;
+      this.sounds.sink.play();
+    } else {
+      this.sounds.hit.currentTime = 0;
+      this.sounds.hit.play();
+    }
+  } else {
+    this.sounds.miss.currentTime = 0;
+    this.sounds.miss.play();
+  }
+}
 
   handleEnemyCellClick(x, y) {
     if (this.gameInstance.isGameOver()) {
