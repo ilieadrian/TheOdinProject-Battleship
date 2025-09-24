@@ -451,6 +451,7 @@ export class DOMController {
     try {
       const result = this.gameInstance.playerAttack(x, y);
       this.updateDisplay();
+      this.playAttackSounds(result);
 
       // If game not over and it's computer's turn, make computer move
       if (
@@ -458,8 +459,16 @@ export class DOMController {
         this.gameInstance.getCurrentPlayer() === this.gameInstance.getComputer()
       ) {
         setTimeout(() => {
-          this.gameInstance.computerTurn();
+          // this.gameInstance.computerTurn();
+          const computerResult = this.gameInstance.computerTurn();
+
+
+          if (computerResult) {
+              this.playAttackSounds(computerResult);
+            }
           this.updateDisplay();
+
+          
         }, 1000);
       }
     } catch (error) {
