@@ -56,6 +56,7 @@ export default class GameController {
     this.currentPlayer =
       this.currentPlayer === this.player ? this.computer : this.player;
     console.log("switchTurns fired, curent playa: ", this.currentPlayer.name);
+   
   }
 
   getPlayer() {

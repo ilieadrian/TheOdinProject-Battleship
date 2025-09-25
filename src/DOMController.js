@@ -22,6 +22,14 @@ export class DOMController {
     };
   }
 
+  initializeSounds() {
+    // Configure audio properties for better performance
+    Object.values(this.sounds).forEach(sound => {
+      sound.preload = 'auto';
+      sound.volume = 0.7; // Adjust volume as needed
+    });
+  }
+
   soundControl() {
     const soundControlContainer = document.getElementById("svg-container");
     const soundOnSVG =
@@ -413,30 +421,7 @@ export class DOMController {
     return container;
   }
 
-  playAttackSounds(result) {
-  if (!this.soundIsOn) return;
 
-  // Always play cannon shot
-  this.sounds.shot.currentTime = 0;
-  this.sounds.shot.play();
-
-  //Outcome sounds
-
-  setTimeout(() => {
-    if (result.hit) {
-      if (result.sunk) {
-        this.sounds.sink.currentTime = 0;
-        this.sounds.sink.play();
-      } else {
-        this.sounds.hit.currentTime = 0;
-        this.sounds.hit.play();
-      }
-    } else {
-      this.sounds.miss.currentTime = 0;
-      this.sounds.miss.play();
-    }
-  }, 1000);
-}
 
   handleEnemyCellClick(x, y) {
     if (this.gameInstance.isGameOver()) {
@@ -452,9 +437,8 @@ export class DOMController {
     }
 
     try {
-      const result = this.gameInstance.playerAttack(x, y);
+      this.gameInstance.playerAttack(x, y);
       this.updateDisplay();
-      this.playAttackSounds(result);
 
       // If game not over and it's computer's turn, make computer move
       if (
@@ -462,16 +446,8 @@ export class DOMController {
         this.gameInstance.getCurrentPlayer() === this.gameInstance.getComputer()
       ) {
         setTimeout(() => {
-          // this.gameInstance.computerTurn();
-          const computerResult = this.gameInstance.computerTurn();
-
-
-          if (computerResult) {
-              this.playAttackSounds(computerResult);
-            }
+          this.gameInstance.computerTurn();
           this.updateDisplay();
-
-          
         }, 1000);
       }
     } catch (error) {
