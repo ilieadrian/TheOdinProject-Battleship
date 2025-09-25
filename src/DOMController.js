@@ -420,19 +420,22 @@ export class DOMController {
   this.sounds.shot.currentTime = 0;
   this.sounds.shot.play();
 
-  // Outcome sounds
-  if (result.hit) {
-    if (result.sunk) {
-      this.sounds.sink.currentTime = 0;
-      this.sounds.sink.play();
+  //Outcome sounds
+
+  setTimeout(() => {
+    if (result.hit) {
+      if (result.sunk) {
+        this.sounds.sink.currentTime = 0;
+        this.sounds.sink.play();
+      } else {
+        this.sounds.hit.currentTime = 0;
+        this.sounds.hit.play();
+      }
     } else {
-      this.sounds.hit.currentTime = 0;
-      this.sounds.hit.play();
+      this.sounds.miss.currentTime = 0;
+      this.sounds.miss.play();
     }
-  } else {
-    this.sounds.miss.currentTime = 0;
-    this.sounds.miss.play();
-  }
+  }, 1000);
 }
 
   handleEnemyCellClick(x, y) {

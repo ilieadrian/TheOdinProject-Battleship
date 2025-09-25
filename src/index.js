@@ -30,7 +30,7 @@ export default class GameController {
       this.winner = this.player;
       console.log("Game OVER - Winner", this.winner);
     }
-
+    
     this.switchTurns(); // <--- always switch
     return result;
   }
