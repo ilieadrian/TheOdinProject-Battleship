@@ -437,7 +437,9 @@ export class DOMController {
     try {
       await this.playCannonSound();
 
-      this.gameInstance.playerAttack(x, y);
+      const result = this.gameInstance.playerAttack(x, y);
+      await this.playOutcomeSound(result);
+
       this.updateDisplay();
 
       // If game not over and it's computer's turn, make computer move
@@ -457,15 +459,43 @@ export class DOMController {
 
   async playCannonSound() {
     if (!this.soundIsOn) {
-      return this.delay(1000); // Still wait 1 second for visual timing
+      return this.delay(1000); 
     }
 
     return new Promise((resolve) => {
       this.sounds.shot.currentTime = 0;
       this.sounds.shot.play();
       
-      // Resolve after cannon sound duration (1 second)
       setTimeout(resolve, 1000);
+    });
+  }
+
+  async playOutcomeSound(result) {
+    if (!this.soundIsOn) {
+      return this.delay(500); // Still wait for visual timing
+    }
+
+    return new Promise((resolve) => {
+      let soundToPlay;
+      let duration = 500; // Default duration
+
+      if (result.hit) {
+        if (result.sunk) {
+          soundToPlay = this.sounds.sink;
+          duration = 1500; // Sinking sound is longer
+        } else {
+          soundToPlay = this.sounds.hit;
+          duration = 800;
+        }
+      } else {
+        soundToPlay = this.sounds.miss;
+        duration = 600;
+      }
+
+      soundToPlay.currentTime = 0;
+      soundToPlay.play();
+      
+      setTimeout(resolve, duration);
     });
   }
 
