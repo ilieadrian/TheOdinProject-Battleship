@@ -5,7 +5,6 @@ export class DOMController {
     this.currentShipOrientation = "horizontal"; // 'horizontal' or 'vertical'
     this.placedShips = new Set(); // Track which ships have been placed
     this.soundIsOn = true;
-
     this.shipImages = {
       Carrier: "assets/images/carrier.svg",
       Battleship: "assets/images/battleship.svg",
@@ -422,8 +421,7 @@ export class DOMController {
   }
 
 
-
-  handleEnemyCellClick(x, y) {
+  async handleEnemyCellClick(x, y) {
     if (this.gameInstance.isGameOver()) {
       this.updateDisplay();
       return;
@@ -437,6 +435,8 @@ export class DOMController {
     }
 
     try {
+      await this.playCannonSound();
+
       this.gameInstance.playerAttack(x, y);
       this.updateDisplay();
 
@@ -452,7 +452,25 @@ export class DOMController {
       }
     } catch (error) {
       console.log("Invalid move:", error.message);
+    }   
+  }
+
+  async playCannonSound() {
+    if (!this.soundIsOn) {
+      return this.delay(1000); // Still wait 1 second for visual timing
     }
+
+    return new Promise((resolve) => {
+      this.sounds.shot.currentTime = 0;
+      this.sounds.shot.play();
+      
+      // Resolve after cannon sound duration (1 second)
+      setTimeout(resolve, 1000);
+    });
+  }
+
+  delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   renderGameboard(gameboard, container, showShips = false) {
