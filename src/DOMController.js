@@ -435,10 +435,13 @@ export class DOMController {
     }
 
     try {
+      this.showAttackIndicator(x,y)
+
       await this.playCannonSound();
 
       const result = this.gameInstance.playerAttack(x, y);
       await this.playOutcomeSound(result);
+      this.clearAttackIndicator(x,y)
 
       this.updateDisplay();
 
@@ -455,6 +458,28 @@ export class DOMController {
     } catch (error) {
       console.log("Invalid move:", error.message);
     }   
+  }
+
+  showAttackIndicator(x, y) {
+    const enemyBoard = document.getElementById("enemy-board");
+    if (!enemyBoard) return;
+
+    const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    if (targetCell) {
+      // targetCell.classList.add('attacking');
+      targetCell.innerHTML = '<div class="attack-indicator">🎯</div>';
+    }
+  }
+
+  clearAttackIndicator(x, y) {
+    const enemyBoard = document.getElementById("enemy-board");
+    if (!enemyBoard) return;
+
+    const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    if (targetCell) {
+      targetCell.classList.remove('attacking');
+      targetCell.innerHTML = '';
+    }
   }
 
   async playCannonSound() {
