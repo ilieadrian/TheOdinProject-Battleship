@@ -420,7 +420,6 @@ export class DOMController {
     return container;
   }
 
-
   async handleEnemyCellClick(x, y) {
     if (this.gameInstance.isGameOver()) {
       this.updateDisplay();
@@ -473,7 +472,8 @@ export class DOMController {
 
   clearAttackIndicator(x, y) {
     const enemyBoard = document.getElementById("enemy-board");
-    if (!enemyBoard) return;
+    const playerBoard = document.getElementById("player-board");
+    // if (!enemyBoard) return;
 
     const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
     if (targetCell) {
