@@ -436,7 +436,6 @@ export class DOMController {
 
     try {
       this.showAttackIndicator(x,y)
-
       await this.playCannonSound();
 
       const result = this.gameInstance.playerAttack(x, y);
@@ -450,10 +449,14 @@ export class DOMController {
         !this.gameInstance.isGameOver() &&
         this.gameInstance.getCurrentPlayer() === this.gameInstance.getComputer()
       ) {
-        setTimeout(() => {
-          this.gameInstance.computerTurn();
-          this.updateDisplay();
-        }, 1000);
+        // setTimeout(() => {
+        //   this.gameInstance.computerTurn();
+        //   this.updateDisplay();
+        // }, 1000);
+
+        await this.delay(800);
+        
+        await this.handleComputerTurn();
       }
     } catch (error) {
       console.log("Invalid move:", error.message);
@@ -461,9 +464,7 @@ export class DOMController {
   }
 
    async handleComputerTurn() {
-    // Update status to show computer is thinking
-    this.updateGameStatus("Computer is targeting...");
-
+ 
     // Computer thinks for a moment
     await this.delay(500);
 
