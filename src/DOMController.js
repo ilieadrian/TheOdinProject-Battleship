@@ -478,17 +478,28 @@ export class DOMController {
         const [x, y] = lastAttackedCoords;
         
         // Show computer attack sequence
-        this.showComputerAttackIndicator(x, y);
+        // this.showComputerAttackIndicator(x, y);
         await this.playCannonSound();
         
         // Update player board visual
-        this.updatePlayerCellVisual(x, y, computerResult);
+        // this.updatePlayerCellVisual(x, y, computerResult);
         await this.playOutcomeSound(computerResult);
       }
     }
 
     // Final display update
     this.updateDisplay();
+  }
+
+  getLastAttackedCoordinates(gameboard) {
+    // This is a helper method to find the most recently attacked cell
+    // You might need to modify your Gameboard class to track this better
+    const attackedCoords = Array.from(gameboard.attackedCoordinates);
+    if (attackedCoords.length === 0) return null;
+    
+    const lastCoord = attackedCoords[attackedCoords.length - 1];
+    const [x, y] = lastCoord.split(',').map(Number);
+    return [x, y];
   }
 
   showAttackIndicator(x, y) {
