@@ -421,6 +421,7 @@ export class DOMController {
   }
 
   async handleEnemyCellClick(x, y) {
+    console.log("handleEnemyCellClick fired")
     if (this.gameInstance.isGameOver()) {
       this.updateDisplay();
       return;
@@ -459,6 +460,36 @@ export class DOMController {
     }   
   }
 
+   async handleComputerTurn() {
+    // Update status to show computer is thinking
+    this.updateGameStatus("Computer is targeting...");
+
+    // Computer thinks for a moment
+    await this.delay(500);
+
+    const computerResult = this.gameInstance.computerTurn();
+    
+    if (computerResult) {
+      // Find the computer's target cell on player board
+      const lastAttackedCoords = this.getLastAttackedCoordinates(this.gameInstance.getPlayer().getGameboard());
+      
+      if (lastAttackedCoords) {
+        const [x, y] = lastAttackedCoords;
+        
+        // Show computer attack sequence
+        this.showComputerAttackIndicator(x, y);
+        await this.playCannonSound();
+        
+        // Update player board visual
+        this.updatePlayerCellVisual(x, y, computerResult);
+        await this.playOutcomeSound(computerResult);
+      }
+    }
+
+    // Final display update
+    this.updateDisplay();
+  }
+
   showAttackIndicator(x, y) {
     const enemyBoard = document.getElementById("enemy-board");
     if (!enemyBoard) return;
@@ -472,14 +503,15 @@ export class DOMController {
 
   clearAttackIndicator(x, y) {
     const enemyBoard = document.getElementById("enemy-board");
-    const playerBoard = document.getElementById("player-board");
-    // if (!enemyBoard) return;
+    if (!enemyBoard) return;
 
     const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+
     if (targetCell) {
       targetCell.classList.remove('attacking');
       targetCell.innerHTML = '';
     }
+    
   }
 
   async playCannonSound() {
