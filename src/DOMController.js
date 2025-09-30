@@ -500,13 +500,29 @@ export class DOMController {
 
 
     if(turn === "playerTurn") {
-        console.log("playerTurn fired")
-     const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+      console.log("playerTurn fired")
+      const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+
       if (targetCell) {
         // targetCell.classList.add('attacking');
         targetCell.innerHTML = '<div class="attack-indicator">🎯</div>';
       }
+    } else if (turn === "computerTurn") {
+      console.log("computerTurn fired")
+
+      const targetCell = playerBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+
+
+      if (targetCell) {
+        // targetCell.classList.add('attacking');
+        targetCell.innerHTML = '<div class="attack-indicator">🎯</div>';
+      }
+    } else {
+      console.log("About to return in last else")
+      return
     }
+
+   
     
   }
 
