@@ -440,7 +440,7 @@ export class DOMController {
 
       const result = this.gameInstance.playerAttack(x, y);
       await this.playOutcomeSound(result);
-      this.clearAttackIndicator(x,y)
+      this.clearAttackIndicator(x,y, "playerTurn")
 
       this.updateDisplay();
 
@@ -477,6 +477,7 @@ export class DOMController {
         
         
         await this.playOutcomeSound(computerResult);
+        this.clearAttackIndicator(x,y, "computerTurn")
       }
     }
 
@@ -526,9 +527,10 @@ export class DOMController {
     
   }
 
-  clearAttackIndicator(x, y) {
+  clearAttackIndicator(x, y, turn) {
     const enemyBoard = document.getElementById("enemy-board");
-    if (!enemyBoard) return;
+    const playerBoard = document.getElementById("player-board");
+    // if (!enemyBoard) return;
 
     const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
 
