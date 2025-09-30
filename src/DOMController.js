@@ -519,7 +519,6 @@ export class DOMController {
         targetCell.innerHTML = '<div class="attack-indicator">🎯</div>';
       }
     } else {
-      console.log("About to return in last else")
       return
     }
 
@@ -532,12 +531,30 @@ export class DOMController {
     const playerBoard = document.getElementById("player-board");
     // if (!enemyBoard) return;
 
-    const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    // const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
 
-    if (targetCell) {
+    // if (targetCell) {
+    //   targetCell.classList.remove('attacking');
+    //   targetCell.innerHTML = '';
+    // }
+
+    if(turn === "playerTurn") {
+      console.log("playerTurn for attack removing fired")
+          const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+
+          if (targetCell) {
       targetCell.classList.remove('attacking');
       targetCell.innerHTML = '';
     }
+          
+
+    } else if(turn === "computerTurn") {
+      console.log("computerTurn for attack removing fired")
+    
+    } else {
+      return;
+    }
+    
     
   }
 
