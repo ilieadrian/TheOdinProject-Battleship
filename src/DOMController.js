@@ -435,7 +435,7 @@ export class DOMController {
     }
 
     try {
-      this.showAttackIndicator(x,y)
+      this.showAttackIndicator(x,y, "playerTurn")
       await this.playCannonSound();
 
       const result = this.gameInstance.playerAttack(x, y);
@@ -449,13 +449,7 @@ export class DOMController {
         !this.gameInstance.isGameOver() &&
         this.gameInstance.getCurrentPlayer() === this.gameInstance.getComputer()
       ) {
-        // setTimeout(() => {
-        //   this.gameInstance.computerTurn();
-        //   this.updateDisplay();
-        // }, 1000);
-
         await this.delay(800);
-        
         await this.handleComputerTurn();
       }
     } catch (error) {
@@ -478,11 +472,10 @@ export class DOMController {
         const [x, y] = lastAttackedCoords;
         
         // Show computer attack sequence
-        // this.showComputerAttackIndicator(x, y);
+        this.showAttackIndicator(x,y, "computerTurn")
         await this.playCannonSound();
         
-        // Update player board visual
-        // this.updatePlayerCellVisual(x, y, computerResult);
+        
         await this.playOutcomeSound(computerResult);
       }
     }
@@ -492,8 +485,6 @@ export class DOMController {
   }
 
   getLastAttackedCoordinates(gameboard) {
-    // This is a helper method to find the most recently attacked cell
-    // You might need to modify your Gameboard class to track this better
     const attackedCoords = Array.from(gameboard.attackedCoordinates);
     if (attackedCoords.length === 0) return null;
     
@@ -502,15 +493,21 @@ export class DOMController {
     return [x, y];
   }
 
-  showAttackIndicator(x, y) {
+  showAttackIndicator(x, y, turn) {
     const enemyBoard = document.getElementById("enemy-board");
-    if (!enemyBoard) return;
+    const playerBoard = document.getElementById("player-board");
+    // if (!enemyBoard) return;
 
-    const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
-    if (targetCell) {
-      // targetCell.classList.add('attacking');
-      targetCell.innerHTML = '<div class="attack-indicator">🎯</div>';
+
+    if(turn === "playerTurn") {
+        console.log("playerTurn fired")
+     const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+      if (targetCell) {
+        // targetCell.classList.add('attacking');
+        targetCell.innerHTML = '<div class="attack-indicator">🎯</div>';
+      }
     }
+    
   }
 
   clearAttackIndicator(x, y) {
@@ -667,10 +664,11 @@ export class DOMController {
       const infoGameContainerDiv = document.createElement("div");
       infoGameContainerDiv.className = "instructions";
       infoGameContainerDiv.innerHTML = `
-        <p>🎯 <strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
+        <p><strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
         <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
     `;
-
+      //<p>🎯 <strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
+       // <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
       //        <p>🚢 Ships: Carrier (5), Battleship (4), Cruiser (3), Submarine (3), Destroyer (2)</p>
 
       infoGameContainer.insertBefore(
