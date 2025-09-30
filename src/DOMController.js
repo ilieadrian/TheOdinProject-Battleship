@@ -529,27 +529,25 @@ export class DOMController {
   clearAttackIndicator(x, y, turn) {
     const enemyBoard = document.getElementById("enemy-board");
     const playerBoard = document.getElementById("player-board");
-    // if (!enemyBoard) return;
-
-    // const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
-
-    // if (targetCell) {
-    //   targetCell.classList.remove('attacking');
-    //   targetCell.innerHTML = '';
-    // }
-
+   
     if(turn === "playerTurn") {
       console.log("playerTurn for attack removing fired")
-          const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+      const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
 
-          if (targetCell) {
-      targetCell.classList.remove('attacking');
-      targetCell.innerHTML = '';
-    }
+      if (targetCell) {
+        targetCell.classList.remove('attacking');
+        targetCell.innerHTML = '';
+      }
           
 
     } else if(turn === "computerTurn") {
       console.log("computerTurn for attack removing fired")
+      const targetCell = playerBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+
+      if (targetCell) {
+        targetCell.classList.remove('attacking');
+        targetCell.innerHTML = '';
+      }
     
     } else {
       return;
