@@ -42,9 +42,7 @@ export default class Player {
   }
 
   placeShipsRandomly() {
-    console.log("placeShipsRandomly fired")
-    // const shipLengths = [5, 4, 3, 3, 2];
-    const shipLengths = [2];
+    const shipLengths = [5, 4, 3, 3, 2];
 
     for (const length of shipLengths) {
       let placed = false;

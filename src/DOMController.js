@@ -245,7 +245,6 @@ export class DOMController {
       this.showMessage("Invalid placement position!", "error");
     }
 
-    // Clean up
     this.clearHighlights();
     this.draggedShip = null;
   }
@@ -301,7 +300,6 @@ export class DOMController {
         ship.className = `draggable-ship ${this.currentShipOrientation}`;
       }
     });
-
   }
 
   onAllShipsPlaced() {
@@ -605,7 +603,7 @@ export class DOMController {
       this.renderGameboard(
         this.gameInstance.getComputer().getGameboard(),
         enemyBoard,
-        true,
+        false,
       ); 
     }
 
@@ -656,9 +654,6 @@ export class DOMController {
         <p><strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
         <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
     `;
-      //<p>🎯 <strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
-      // <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
-      //        <p>🚢 Ships: Carrier (5), Battleship (4), Cruiser (3), Submarine (3), Destroyer (2)</p>
 
       infoGameContainer.insertBefore(
         infoGameContainerDiv,
@@ -666,7 +661,6 @@ export class DOMController {
       );
     }
 
-    // Clear existing content
     gameContainer.innerHTML = "";
 
     const statusDiv = document.createElement("div");
@@ -674,7 +668,6 @@ export class DOMController {
     statusDiv.className = "game-status";
     gameContainer.appendChild(statusDiv);
 
-    // Game controls
     const controlsDiv = document.createElement("div");
     controlsDiv.className = "game-controls";
 
