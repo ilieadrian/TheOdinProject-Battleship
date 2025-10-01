@@ -105,9 +105,14 @@ function runGame() {
 runGame();
 
 //To add
-//While placing ships do not display how to play section
-// Add sounds
+// While computer is thinking or i have the space betwon sounds i can put shoot markers on the
+//-board, add prevention
+//remove logs
+//Fluff the code 
+  //Laung and go to React
 //UI revamping
+//getLastAttackedCoordinates(gameboard) IN DOM CONTROLLER{
+    // You might need to modify your Gameboard class to track this better
 // AI refining - if a hit is detected it hits the nearby cells,
 //             - if the remained cell space does it not enough for the lenght of the remanined ships do not hit on cell
 //Readd tests

@@ -5,6 +5,8 @@ export class DOMController {
     this.currentShipOrientation = "horizontal"; // 'horizontal' or 'vertical'
     this.placedShips = new Set(); // Track which ships have been placed
     this.soundIsOn = true;
+    this.isProcessingAttack = false
+
     this.shipImages = {
       Carrier: "assets/images/carrier.svg",
       Battleship: "assets/images/battleship.svg",
@@ -434,6 +436,12 @@ export class DOMController {
       return;
     }
 
+    if (this.isProcessingAttack) {
+      return;
+    }
+
+    this.isProcessingAttack = true;
+
     try {
       this.showAttackIndicator(x,y, "playerTurn")
       await this.playCannonSound();
@@ -455,6 +463,9 @@ export class DOMController {
     } catch (error) {
       console.log("Invalid move:", error.message);
     }   
+    finally {
+      this.isProcessingAttack = false;
+    }
   }
 
    async handleComputerTurn() {
@@ -497,15 +508,12 @@ export class DOMController {
   showAttackIndicator(x, y, turn) {
     const enemyBoard = document.getElementById("enemy-board");
     const playerBoard = document.getElementById("player-board");
-    // if (!enemyBoard) return;
-
 
     if(turn === "playerTurn") {
       console.log("playerTurn fired")
       const targetCell = enemyBoard.querySelector(`[data-x="${x}"][data-y="${y}"]`);
 
       if (targetCell) {
-        // targetCell.classList.add('attacking');
         targetCell.innerHTML = '<div class="attack-indicator">🎯</div>';
       }
     } else if (turn === "computerTurn") {
@@ -515,15 +523,11 @@ export class DOMController {
 
 
       if (targetCell) {
-        // targetCell.classList.add('attacking');
         targetCell.innerHTML = '<div class="attack-indicator">🎯</div>';
       }
     } else {
       return
-    }
-
-   
-    
+    }    
   }
 
   clearAttackIndicator(x, y, turn) {
