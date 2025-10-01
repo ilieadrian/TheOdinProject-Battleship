@@ -9,7 +9,6 @@ export default class Player {
   }
 
   attack(enemyGameboard, x, y) {
-    console.log("Atack method fired");
     if (enemyGameboard.hasBeenAttacked(x, y)) {
       throw new Error("Coordinate already attacked");
     }
@@ -18,7 +17,6 @@ export default class Player {
   }
 
   makeRandomAttack(enemyGameboard) {
-    console.log("Computer will make a random atack");
     if (!this.isComputer) {
       throw new Error("Only computer players can make random attacks");
     }
@@ -44,7 +42,8 @@ export default class Player {
   }
 
   placeShipsRandomly() {
-    //const shipLengths = [5, 4, 3, 3, 2];
+    console.log("placeShipsRandomly fired")
+    // const shipLengths = [5, 4, 3, 3, 2];
     const shipLengths = [2];
 
     for (const length of shipLengths) {

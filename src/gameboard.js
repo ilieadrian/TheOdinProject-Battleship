@@ -20,7 +20,6 @@ export default class Gameboard {
   }
 
   canPlaceShip(x, y, length, isHorizontal) {
-    // Check if ship fits within board boundaries
     if (isHorizontal) {
       if (x + length > this.size) return false;
     } else {
@@ -53,7 +52,6 @@ export default class Gameboard {
       coordinates: [],
     };
 
-    // Place ship on board
     for (let i = 0; i < length; i++) {
       const placeX = isHorizontal ? x + i : x;
       const placeY = isHorizontal ? y : y + i;
@@ -81,13 +79,9 @@ export default class Gameboard {
     const target = this.gameboard[y][x];
 
     if (target === null) {
-      console.log("Missed hit");
-      // Miss
       this.missedAttacks.push([x, y]);
       return { hit: false, ship: null, sunk: false };
     } else {
-      // Hit
-      console.log("hit hit");
       target.hit();
       const sunk = target.isSunk();
       return { hit: true, ship: target, sunk };
@@ -116,22 +110,5 @@ export default class Gameboard {
 
   hasBeenAttacked(x, y) {
     return this.attackedCoordinates.has(`${x},${y}`);
-  }
-
-  printBoard() {
-    const display = this.gameboard
-      .map((row) =>
-        row
-          .map((cell) => {
-            if (cell === null) return ".";
-            if (cell === "hit") return "X";
-            if (cell === "miss") return "o";
-            if (typeof cell === "object") return "S"; // ship
-          })
-          .join(" "),
-      )
-      .join("\n");
-
-    return display;
   }
 }

@@ -11,7 +11,6 @@ export default class GameController {
   }
 
   initializeGame() {
-    // this.player.placeShipsRandomly();
     this.computer.placeShipsRandomly();
     this.currentPlayer = this.player;
     this.gameOver = false;
@@ -28,10 +27,9 @@ export default class GameController {
     if (this.computer.getGameboard().allShipsSunk()) {
       this.gameOver = true;
       this.winner = this.player;
-      console.log("Game OVER - Winner", this.winner);
     }
-    
-    this.switchTurns(); // <--- always switch
+
+    this.switchTurns();
     return result;
   }
 
@@ -45,18 +43,15 @@ export default class GameController {
     if (this.player.getGameboard().allShipsSunk()) {
       this.gameOver = true;
       this.winner = this.computer;
-      console.log("Game OVER - Winner", this.winner);
     }
 
-    this.switchTurns(); // <--- always switch
+    this.switchTurns();
     return result;
   }
 
   switchTurns() {
     this.currentPlayer =
       this.currentPlayer === this.player ? this.computer : this.player;
-    console.log("switchTurns fired, curent playa: ", this.currentPlayer.name);
-   
   }
 
   getPlayer() {
@@ -82,37 +77,30 @@ export default class GameController {
   resetGame() {
     this.player = new Player("Player", false);
     this.computer = new Player("Computer", true);
-
-    //
     this.gameOver = false;
     this.winner = null;
-    //
     runGame();
   }
 }
 
 function runGame() {
-  console.log("Run game fired");
   const gameInstance = new GameController();
   gameInstance.initializeGame();
   const domController = new DOMController(gameInstance);
   domController.setupGame();
-  // console.log(domController)
-  // console.log(gameInstance.player.gameboard.printBoard())
-  // console.log(gameInstance.computer.gameboard.printBoard())
 }
 
 runGame();
 
 //To add
-// While computer is thinking or i have the space betwon sounds i can put shoot markers on the
-//-board, add prevention
+
 //remove logs
-//Fluff the code 
-  //Laung and go to React
+//Add this to a read me
+//Fluff the code
+//Laung and go to React
 //UI revamping
 //getLastAttackedCoordinates(gameboard) IN DOM CONTROLLER{
-    // You might need to modify your Gameboard class to track this better
+// You might need to modify your Gameboard class to track this better
 // AI refining - if a hit is detected it hits the nearby cells,
 //             - if the remained cell space does it not enough for the lenght of the remanined ships do not hit on cell
 //Readd tests
