@@ -716,6 +716,13 @@ export class DOMController {
     this.draggedShip = null;
     this.currentShipOrientation = "horizontal";
 
+    const infoGameContainer = document.getElementById("info-game-container");
+
+    if (infoGameContainer) {
+      const existingGamePlayInstructions =
+        infoGameContainer.querySelectorAll(".instructions");
+      existingGamePlayInstructions.forEach((instruction) => instruction.remove());
+
     gameContainer.innerHTML = "";
 
     const instructionsDiv = document.createElement("div");
@@ -739,4 +746,5 @@ export class DOMController {
     boardsContainer.appendChild(shipBoardContainer);
     gameContainer.appendChild(boardsContainer);
   }
+}
 }
