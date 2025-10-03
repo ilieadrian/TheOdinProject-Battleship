@@ -223,6 +223,10 @@ button:active {
   border-radius: 10px;
 }
 
+.setup-instructions-panel{
+  display: none;
+}
+
 .setup-instructions h2 {
   margin-top: 0;
   color: #ffd700;
@@ -447,3 +451,25 @@ button:active {
     font-size: 1.5rem;
   }
 }
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .setup-instructions{
+  display: none;
+}
+
+  .setup-instructions-panel{
+  display: block;
+}
+.setup-instructions-panel-content{
+  text-align: center;
+  margin: 20px 0;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+}
+}
+

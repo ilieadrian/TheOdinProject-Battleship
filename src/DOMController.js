@@ -655,6 +655,7 @@ export class DOMController {
         <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
     `;
 
+
       infoGameContainer.insertBefore(
         infoGameContainerDiv,
         document.getElementById("game-container"),
@@ -731,7 +732,20 @@ export class DOMController {
       <h2>Place Your Ships</h2>
       <p>Drag each ship from the right panel to your board on the left. Use the "Rotate Ships" button to change orientation.</p>
     `;
-    gameContainer.appendChild(instructionsDiv);
+
+    const instructionsDivPanel = document.createElement("div");
+    instructionsDivPanel.className = "setup-instructions-panel";
+    instructionsDivPanel.innerHTML = `
+      <details closed>
+      <summary>Place Your Ships</summary>
+      <p class="setup-instructions-panel-content">Drag each ship from the right panel to your board on the left. Use the "Rotate Ships" button to change orientation.</p>
+    </details>
+
+    `;
+      gameContainer.appendChild(instructionsDiv);
+
+    gameContainer.appendChild(instructionsDivPanel);
+
 
     const boardsContainer = document.createElement("div");
     boardsContainer.className = "boards-container";
