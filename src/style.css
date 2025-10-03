@@ -471,5 +471,20 @@ button:active {
   padding: 20px;
   border-radius: 10px;
 }
+
+.ship-container {
+  /* display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: 140px 140px;
+  justify-items: center;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background: rgba(10, 5, 5, 0.05);
+  border-radius: 10px; */
+  height: 306px;
+  width: 306px;
+  
+}
 }
 
