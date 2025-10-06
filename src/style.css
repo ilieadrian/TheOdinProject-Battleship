@@ -5,6 +5,9 @@ body {
   background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: white;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .container {
@@ -409,14 +412,13 @@ button:active {
   transform: rotate(5deg);
 }
 
-
 .attribution {
   text-align: center;
   color: white;
   width: 100%;
   padding-bottom: 0.3rem;
   font-size: 0.7rem;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   left: 0;
   z-index: 999;
