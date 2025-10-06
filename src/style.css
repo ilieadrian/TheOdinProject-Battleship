@@ -455,10 +455,40 @@ button:active {
 @media (max-width: 480px) {
   h1 {
     font-size: 1.2rem;
+      margin-bottom: 15px;
+
   }
 
   .setup-instructions{
   display: none;
+}
+
+.gameboard {
+    padding: 10px;
+
+}
+
+.gameboard h3 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.board-grid {
+  grid-template-columns: repeat(10, 25px);
+  grid-template-rows: repeat(10, 25px);
+  gap: 2px;
+  
+}
+
+.cell {
+  width: 25px;
+  height: 25px;
+  }
+
+.orientation-btn {
+  padding: 8px 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
   .setup-instructions-panel{
@@ -470,6 +500,10 @@ button:active {
   background: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 10px;
+}
+
+.boards-container {
+  flex-direction: column;
 }
 
 .ship-container {
@@ -484,7 +518,6 @@ button:active {
   border-radius: 10px; */
   height: 306px;
   width: 306px;
-  
-}
+  }
 }
 
