@@ -409,6 +409,24 @@ button:active {
   transform: rotate(5deg);
 }
 
+
+.attribution {
+  text-align: center;
+  color: white;
+  width: 100%;
+  padding-bottom: 0.3rem;
+  font-size: 0.7rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.attribution a {
+  margin-left: 0.3rem;
+  color: rgb(211, 211, 211);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .boards-container {
@@ -485,6 +503,12 @@ button:active {
   height: 25px;
   }
 
+  .ship-cell {
+  width: 23px;
+  height: 23px;
+
+}
+
 .orientation-btn {
   padding: 8px 10px;
   cursor: pointer;
@@ -508,16 +532,16 @@ button:active {
 
 .ship-container {
   /* display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: 140px 140px;
-  justify-items: center;
+  grid-template-columns: repeat(10, 1fr);*/
+  grid-template-rows: 100px 100px; 
+   /* justify-items: center;
   align-items: center;
   gap: 15px;
   padding: 10px;
   background: rgba(10, 5, 5, 0.05);
   border-radius: 10px; */
-  height: 306px;
-  width: 306px;
+  height: 260px;
+  width: 260px;
   }
 }
 
