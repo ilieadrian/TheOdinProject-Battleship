@@ -1,13 +1,13 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  padding: 20px;
+  /* padding: 20px; */
   background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .container {
