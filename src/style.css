@@ -1,7 +1,7 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  /* padding: 20px; */
+  padding: 10px;
   background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: white;
   min-height: 100vh;
@@ -29,7 +29,7 @@ h1 {
 
 #svg-container {
   position: absolute;
-  top: 0;
+  top: 15px;
   right: 0;
 }
 
@@ -216,6 +216,10 @@ button:active {
   border-radius: 10px;
   font-size: 1rem;
   line-height: 1.5;
+}
+
+.instructions-panel{
+  display: none;
 }
 
 .setup-instructions {
@@ -416,12 +420,7 @@ button:active {
   text-align: center;
   color: white;
   width: 100%;
-  padding-bottom: 0.3rem;
   font-size: 0.7rem;
-  /* position: absolute; */
-  bottom: 0;
-  left: 0;
-  z-index: 999;
 }
 
 .attribution a {
@@ -476,16 +475,24 @@ button:active {
   h1 {
     font-size: 1.2rem;
       margin-bottom: 15px;
-
   }
 
-  .setup-instructions{
+
+.instructions {
+  display: none;
+}
+
+.instructions-panel{
+  display: block;
+  order: 4;
+}  
+
+.setup-instructions{
   display: none;
 }
 
 .gameboard {
     padding: 10px;
-
 }
 
 .gameboard h3 {
@@ -508,13 +515,17 @@ button:active {
   .ship-cell {
   width: 23px;
   height: 23px;
-
 }
 
 .orientation-btn {
   padding: 8px 10px;
   cursor: pointer;
   margin-bottom: 10px;
+}
+
+.start-game-btn {
+  padding: 12px 25px;
+  font-size: 16px;
 }
 
   .setup-instructions-panel{
@@ -533,15 +544,7 @@ button:active {
 }
 
 .ship-container {
-  /* display: grid;
-  grid-template-columns: repeat(10, 1fr);*/
   grid-template-rows: 100px 100px; 
-   /* justify-items: center;
-  align-items: center;
-  gap: 15px;
-  padding: 10px;
-  background: rgba(10, 5, 5, 0.05);
-  border-radius: 10px; */
   height: 260px;
   width: 260px;
   }

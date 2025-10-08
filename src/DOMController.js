@@ -652,12 +652,28 @@ export class DOMController {
       infoGameContainerDiv.className = "instructions";
       infoGameContainerDiv.innerHTML = `
         <p><strong>How to Play:</strong> Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
-        <p>💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
+        <p>🎯 = Targeted cell, 💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
     `;
+
+    const infoGameContainerDivPanel = document.createElement("div");
+    infoGameContainerDivPanel.className = "instructions-panel";
+    infoGameContainerDivPanel.innerHTML = `
+      <details class=setup-instructions-panel-content" closed>
+      <summary>How to Play:</summary>
+      <div class="setup-instructions-panel-content">
+        <p>Click on the enemy waters (right board) to attack! Your ships are shown on the left board.</p>
+        <p>🎯 = Targeted cell, 💥 Red = Hit, 💧 Blue = Miss, 💀 Dark Red = Sunk Ship</p>
+      </div> 
+    </details>`;
 
 
       infoGameContainer.insertBefore(
         infoGameContainerDiv,
+        document.getElementById("game-container"),
+      );
+
+      infoGameContainer.insertBefore(
+        infoGameContainerDivPanel,
         document.getElementById("game-container"),
       );
     }
