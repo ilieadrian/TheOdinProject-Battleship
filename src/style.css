@@ -218,9 +218,6 @@ button:active {
   line-height: 1.5;
 }
 
-.instructions-panel{
-  display: none;
-}
 
 .setup-instructions {
   text-align: center;
@@ -477,18 +474,28 @@ button:active {
       margin-bottom: 15px;
   }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+.container h1{
+  order: 1;
+} 
 
 .instructions {
-  display: none;
+  order: 2;
 }
 
-.instructions-panel{
-  display: block;
-  order: 4;
-}  
 
 .setup-instructions{
   display: none;
+}
+
+
+#game-container{
+  order: 1
+  /*  */
 }
 
 .gameboard {
