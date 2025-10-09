@@ -488,19 +488,25 @@ button:active {
   order: 2;
 }
 
-
-
-
+.setup-instructions {
+  display: none;
+}
 
 #game-container{
   order: 1;
   display: flex;
   flex-direction: column;
-  /*  */
 }
 
 #game-status{
   order: 1'
+}
+
+.game-status {
+  font-size: 0.8rem;
+  margin: 0px 0;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .game-controls{
