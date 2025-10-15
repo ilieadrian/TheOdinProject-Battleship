@@ -569,6 +569,7 @@ button:active {
 
 .boards-container {
   flex-direction: column;
+  margin-top: 10px;
 }
 
 .ship-container {
