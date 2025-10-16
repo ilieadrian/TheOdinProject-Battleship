@@ -483,6 +483,30 @@ button:active {
   height: 300px;
   width: 310px;
   }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container h1{
+  order: 1;
+} 
+
+.game-status {
+  margin: 0 40px;
+}
+
+.instructions {
+  order: 2;
+}
+
+#game-container{
+  order: 1;
+}
+.game-controls{
+  order: -1;
+}
 }
 
 @media (max-width: 480px) {
@@ -600,5 +624,26 @@ button:active {
   height: 260px;
   width: 260px;
   }
+
+  #game-container{
+  order: 1;
+  }
+
+#game-status{
+  order: -1;
+}
+
+.game-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  margin: 0 30px;
+  padding: 10px;
+}
+
+.game-controls{
+  order: 3;
+}
 }
 
