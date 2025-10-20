@@ -3,8 +3,6 @@ V1 - Beta
  [Live version](https://battleship-ia.netlify.app)
 
 Following improvents will be added in near future:
- - Mobile improvements - including hiding the game info tabs
- - UI revamping / Put target icon in game instructions
  - images for ships - already added in folder, needs to be added in UI
  - Fluff the code, and better ordering CSS included
  - getLastAttackedCoordinates(gameboard) IN DOM CONTROLLER: You might need to modify your Gameboard class to track this better

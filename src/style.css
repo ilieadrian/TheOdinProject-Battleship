@@ -320,6 +320,10 @@ button:active {
   opacity: 0.7;
 }
 
+.ship-wrapper.carrier::after{
+  content: url(assets/images/carrier.svg);
+}
+
 .orientation-btn {
   background: #ff6b35;
   color: white;

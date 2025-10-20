@@ -123,7 +123,7 @@ export class DOMController {
 
   createDraggableShip(length, name, className, shipId) {
     const shipWrapper = document.createElement("div");
-    shipWrapper.className = "ship-wrapper";
+    shipWrapper.className = `ship-wrapper ${name.toLowerCase()}`;
 
     const shipLabel = document.createElement("div");
     shipLabel.className = "ship-label";
