@@ -502,11 +502,23 @@ button:active {
 }
 
 #game-container{
+  display: flex;
+  flex-direction: column;
   order: 1;
 }
-.game-controls{
-  order: -1;
+
+#game-status{
+  order: 1;
 }
+
+.boards-container{
+  order: 2;
+}
+.game-controls{
+  order: 3;
+}
+
+
 }
 
 @media (max-width: 480px) {
@@ -561,10 +573,6 @@ button:active {
   font-size: 0.8rem;
   margin: 0 30px;
   padding: 10px;
-}
-
-.game-controls{
-  order: 3;
 }
 
 .gameboard {
@@ -624,14 +632,6 @@ button:active {
   height: 260px;
   width: 260px;
   }
-
-  #game-container{
-  order: 1;
-  }
-
-#game-status{
-  order: -1;
-}
 
 .game-status {
   display: flex;
