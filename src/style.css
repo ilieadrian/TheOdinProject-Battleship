@@ -285,6 +285,11 @@ button:active {
   border: 2px solid #4682b4;
   border-radius: 4px;
   background: #708090;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  width: 100%;
 }
 
 .draggable-ship:hover {
@@ -307,21 +312,17 @@ button:active {
 .ship-cell {
   width: 30px;
   height: 30px;
-  border: 1px solid #2f4f4f;
-  background: #708090;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* background-color: #708090; */
 }
 
 .ship-cell::after {
-  content: "⚓";
-  font-size: 16px;
+  /* content: "⚓";
+  font-size: 16px; */
   opacity: 0.7;
 }
 
-.ship-wrapper.carrier::after{
-  content: url(assets/images/carrier.svg);
+.carrier .draggable-ship{
+  background-image: url('assets/images/carrier.svg');
 }
 
 .orientation-btn {
