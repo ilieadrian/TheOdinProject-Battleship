@@ -325,6 +325,19 @@ button:active {
   background-image: url('assets/images/carrier.svg');
 }
 
+.battleship .draggable-ship{
+  background-image: url('assets/images/battleship.svg');
+}
+.destroyer .draggable-ship{
+  background-image: url('assets/images/destroyer.svg');
+}
+.cruiser .draggable-ship{
+  background-image: url('assets/images/cruiser.svg');
+}
+.submarine .draggable-ship{
+  background-image: url('assets/images/submarine.svg');
+}
+
 .orientation-btn {
   background: #ff6b35;
   color: white;
