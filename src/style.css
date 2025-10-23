@@ -306,18 +306,15 @@ button:active {
 }
 
 .draggable-ship.vertical {
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .ship-cell {
   width: 30px;
   height: 30px;
-  /* background-color: #708090; */
 }
 
 .ship-cell::after {
-  /* content: "⚓";
-  font-size: 16px; */
   opacity: 0.7;
 }
 
@@ -325,17 +322,38 @@ button:active {
   background-image: url('assets/images/carrier.svg');
 }
 
+.carrier .draggable-ship.vertical {
+  transform: rotate(90deg);
+}
+/*//here */
 .battleship .draggable-ship{
   background-image: url('assets/images/battleship.svg');
+}
+
+.battleship .draggable-ship.vertical {
+  transform: rotate(90deg);
 }
 .destroyer .draggable-ship{
   background-image: url('assets/images/destroyer.svg');
 }
+.destroyer .draggable-ship.vertical {
+  transform: rotate(90deg);
+}
+
 .cruiser .draggable-ship{
   background-image: url('assets/images/cruiser.svg');
 }
+
+.cruiser .draggable-ship.vertical {
+  transform: rotate(90deg);
+}
+
 .submarine .draggable-ship{
   background-image: url('assets/images/submarine.svg');
+}
+
+.submarine .draggable-ship.vertical {
+  transform: rotate(90deg);
 }
 
 .orientation-btn {
