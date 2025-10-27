@@ -100,11 +100,11 @@ export class DOMController {
     shipContainer.id = "ship-container";
 
     const ships = [
-      [5, "Carrier", "ship1"],
-      [4, "Battleship", "ship2"],
-      [2, "Destroyer", "ship3"],
-      [3, "Cruiser", "ship4"],
-      [3, "Submarine", "ship5"],
+      [5, "carrier", "ship1"],
+      [4, "battleship", "ship2"],
+      [2, "destroyer", "ship3"],
+      [3, "cruiser", "ship4"],
+      [3, "submarine", "ship5"],
     ];
 
     ships.forEach((shipInfo, index) => {
@@ -226,7 +226,7 @@ export class DOMController {
         this.gameInstance
           .getPlayer()
           .getGameboard()
-          .placeShip(x, y, this.draggedShip.length, isHorizontal);
+          .placeShip(x, y, this.draggedShip.length, isHorizontal, this.draggedShip.name);
 
         this.placedShips.add(this.draggedShip.shipId);
         this.draggedShip.element.style.display = "none";

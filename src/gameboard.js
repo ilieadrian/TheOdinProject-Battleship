@@ -50,6 +50,7 @@ export default class Gameboard {
     const shipData = {
       ship,
       coordinates: [],
+      name: name,
     };
 
     for (let i = 0; i < length; i++) {
@@ -63,7 +64,7 @@ export default class Gameboard {
         //work here
     }
     console.log("Shipdata bellow")
-    console.table(shipData.coordinates)
+    console.table(shipData)
     this.ships.push(shipData);
     return ship;
   }

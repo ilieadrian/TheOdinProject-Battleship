@@ -18,9 +18,9 @@ export default class Ship {
     }
   }
 
-  setName(name) {
-    this.name = name;
-  }
+  // getName(name) {
+  //   return this.name;
+  // }
 
   getHits() {
     return this.hits;
