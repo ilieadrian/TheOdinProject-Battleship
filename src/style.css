@@ -336,6 +336,7 @@ button:active {
 .destroyer .draggable-ship{
   background-image: url('assets/images/destroyer.svg');
 }
+
 .destroyer .draggable-ship.vertical {
   transform: rotate(90deg);
 }
