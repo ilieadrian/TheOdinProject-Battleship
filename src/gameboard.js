@@ -50,21 +50,24 @@ export default class Gameboard {
     const shipData = {
       ship,
       coordinates: [],
-      name: name,
     };
-
+    
     for (let i = 0; i < length; i++) {
       const placeX = isHorizontal ? x + i : x;
       const placeY = isHorizontal ? y : y + i;
-      //work here
-      this.gameboard[placeY][placeX] = ship;
-      console.log(ship.getName())
+      this.gameboard[placeY][placeX] = {ship, name};
       shipData.coordinates.push([placeY, placeX]);
-
-        //work here
     }
+
+    // Remove this after ship class implementation
+      // Remove this after ship class implementation
+        // Remove this after ship class implementation
     console.log("Shipdata bellow")
     console.table(shipData)
+        // Remove this after ship class implementation  
+      // Remove this after ship class implementation
+    // Remove this after ship class implementation
+
     this.ships.push(shipData);
     return ship;
   }
