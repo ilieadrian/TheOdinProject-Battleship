@@ -356,7 +356,7 @@ export class DOMController {
   }
 
   createGameboard(player, isEnemy = false) {
-    const container = document.createElement("div");
+     const container = document.createElement("div");
     container.className = `gameboard ${isEnemy ? "enemy-board" : "player-board"}`;
 
     const title = document.createElement("h3");
