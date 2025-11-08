@@ -561,6 +561,11 @@ export class DOMController {
   }
 
   renderGameboard(gameboard, container, showShips = false) {
+
+    const board = container.querySelector('.board-grid');
+    if (!board) return;
+
+
     const cells = container.querySelectorAll(".cell");
 
     cells.forEach((cell) => {
@@ -583,6 +588,42 @@ export class DOMController {
         }
       } else if (showShips && ship) {
         cell.classList.add("ship");
+      }
+    });
+
+    if (showShips) {
+      const ships = gameboard.getShips();
+      ships.forEach((shipData) => {
+        console.log(shipData)
+        this.addShipClassesToCells(board, shipData);
+      });
+    }
+  }
+
+
+   addShipClassesToCells(board, shipData) {
+    const { coordinates, name, isHorizontal } = shipData;
+    
+    if (!coordinates || coordinates.length === 0) return;
+
+    // Find starting cell (top-left corner)
+    const minY = Math.min(...coordinates.map(coord => coord[0]));
+    const minX = Math.min(...coordinates.map(coord => coord[1]));
+
+    // Add classes to each cell
+    coordinates.forEach((coord, index) => {
+      const [y, x] = coord;
+      const cell = board.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+      
+      if (cell) {
+        cell.classList.add(`ship-${name}`);
+        cell.classList.add(isHorizontal ? 'ship-horizontal' : 'ship-vertical');
+        
+        // Mark the starting cell
+        if (y === minY && x === minX) {
+          cell.classList.add('ship-start');
+          cell.dataset.shipLength = coordinates.length;
+        }
       }
     });
   }
