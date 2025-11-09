@@ -37,7 +37,7 @@ export default class Gameboard {
     return true;
   }
 
-  placeShip(x, y, length, isHorizontal = true) {
+  placeShip(x, y, length, isHorizontal = true, name) {
     if (!this.isValidCoordinate(x, y)) {
       throw new Error("Invalid coordinates");
     }
@@ -50,6 +50,7 @@ export default class Gameboard {
     const shipData = {
       ship,
       coordinates: [],
+      name: name,
     };
 
     for (let i = 0; i < length; i++) {

@@ -605,7 +605,9 @@ export class DOMController {
   }
 
   addShipClassesToCells(board, shipData) {
-    const { coordinates, name, isHorizontal } = shipData;
+    const { coordinates, isHorizontal } = shipData;
+    const name = shipData.ship.name;
+    console.log("addShipClassesToCells name", name)
 
     if (!coordinates || coordinates.length === 0) return;
 
