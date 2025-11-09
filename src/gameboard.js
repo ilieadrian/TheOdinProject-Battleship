@@ -46,12 +46,12 @@ export default class Gameboard {
       throw new Error("Cannot place ship at specified location");
     }
 
-    const ship = new Ship(length);
+    const ship = new Ship(length, name);
     const shipData = {
       ship,
       coordinates: [],
     };
-    
+
     for (let i = 0; i < length; i++) {
       const placeX = isHorizontal ? x + i : x;
       const placeY = isHorizontal ? y : y + i;
@@ -60,12 +60,12 @@ export default class Gameboard {
     }
 
     // Remove this after ship class implementation
-      // Remove this after ship class implementation
-        // Remove this after ship class implementation
-    console.log("Shipdata bellow")
-    console.table(shipData)
-        // Remove this after ship class implementation  
-      // Remove this after ship class implementation
+    // Remove this after ship class implementation
+    // Remove this after ship class implementation
+    console.log("Shipdata bellow");
+    console.table(shipData);
+    // Remove this after ship class implementation
+    // Remove this after ship class implementation
     // Remove this after ship class implementation
 
     this.ships.push(shipData);

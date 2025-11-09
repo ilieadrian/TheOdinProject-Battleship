@@ -2,7 +2,7 @@ export class DOMController {
   constructor(gameInstance) {
     this.gameInstance = gameInstance;
     this.draggedShip = null;
-    this.currentShipOrientation = "horizontal"; 
+    this.currentShipOrientation = "horizontal";
     this.placedShips = new Set();
     this.soundIsOn = true;
     this.isProcessingAttack = false;
@@ -26,7 +26,7 @@ export class DOMController {
   initializeSounds() {
     Object.values(this.sounds).forEach((sound) => {
       sound.preload = "auto";
-      sound.volume = 0.7; 
+      sound.volume = 0.7;
     });
   }
 
@@ -166,7 +166,7 @@ export class DOMController {
   }
 
   handleDragOver(e) {
-    e.preventDefault(); 
+    e.preventDefault();
 
     if (!this.draggedShip) return;
 
@@ -226,7 +226,13 @@ export class DOMController {
         this.gameInstance
           .getPlayer()
           .getGameboard()
-          .placeShip(x, y, this.draggedShip.length, isHorizontal, this.draggedShip.name);
+          .placeShip(
+            x,
+            y,
+            this.draggedShip.length,
+            isHorizontal,
+            this.draggedShip.name,
+          );
 
         this.placedShips.add(this.draggedShip.shipId);
         this.draggedShip.element.style.display = "none";
@@ -312,7 +318,7 @@ export class DOMController {
     startButton.addEventListener("click", () => {
       this.gameInstance.getComputer().placeShipsRandomly();
       this.playGame();
-   });
+    });
 
     orientationBtn.disabled = true;
     shipContainer.appendChild(startButton);
@@ -356,7 +362,7 @@ export class DOMController {
   }
 
   createGameboard(player, isEnemy = false) {
-     const container = document.createElement("div");
+    const container = document.createElement("div");
     container.className = `gameboard ${isEnemy ? "enemy-board" : "player-board"}`;
 
     const title = document.createElement("h3");
@@ -534,12 +540,12 @@ export class DOMController {
 
     return new Promise((resolve) => {
       let soundToPlay;
-      let duration = 500; 
+      let duration = 500;
 
       if (result.hit) {
         if (result.sunk) {
           soundToPlay = this.sounds.sink;
-          duration = 1500; 
+          duration = 1500;
         } else {
           soundToPlay = this.sounds.hit;
           duration = 800;
@@ -561,10 +567,8 @@ export class DOMController {
   }
 
   renderGameboard(gameboard, container, showShips = false) {
-
-    const board = container.querySelector('.board-grid');
+    const board = container.querySelector(".board-grid");
     if (!board) return;
-
 
     const cells = container.querySelectorAll(".cell");
 
@@ -594,34 +598,33 @@ export class DOMController {
     if (showShips) {
       const ships = gameboard.getShips();
       ships.forEach((shipData) => {
-        console.log(shipData)
+        console.log(shipData);
         this.addShipClassesToCells(board, shipData);
       });
     }
   }
 
-
-   addShipClassesToCells(board, shipData) {
+  addShipClassesToCells(board, shipData) {
     const { coordinates, name, isHorizontal } = shipData;
-    
+
     if (!coordinates || coordinates.length === 0) return;
 
     // Find starting cell (top-left corner)
-    const minY = Math.min(...coordinates.map(coord => coord[0]));
-    const minX = Math.min(...coordinates.map(coord => coord[1]));
+    const minY = Math.min(...coordinates.map((coord) => coord[0]));
+    const minX = Math.min(...coordinates.map((coord) => coord[1]));
 
     // Add classes to each cell
     coordinates.forEach((coord, index) => {
       const [y, x] = coord;
       const cell = board.querySelector(`[data-x="${x}"][data-y="${y}"]`);
-      
+
       if (cell) {
         cell.classList.add(`ship-${name}`);
-        cell.classList.add(isHorizontal ? 'ship-horizontal' : 'ship-vertical');
-        
+        cell.classList.add(isHorizontal ? "ship-horizontal" : "ship-vertical");
+
         // Mark the starting cell
         if (y === minY && x === minX) {
-          cell.classList.add('ship-start');
+          cell.classList.add("ship-start");
           cell.dataset.shipLength = coordinates.length;
         }
       }
@@ -645,7 +648,7 @@ export class DOMController {
         this.gameInstance.getComputer().getGameboard(),
         enemyBoard,
         false,
-      ); 
+      );
     }
 
     this.updateGameStatus();
@@ -762,20 +765,22 @@ export class DOMController {
     if (infoGameContainer) {
       const existingGamePlayInstructions =
         infoGameContainer.querySelectorAll(".instructions");
-      existingGamePlayInstructions.forEach((instruction) => instruction.remove());
+      existingGamePlayInstructions.forEach((instruction) =>
+        instruction.remove(),
+      );
 
-    gameContainer.innerHTML = "";
+      gameContainer.innerHTML = "";
 
-    const instructionsDiv = document.createElement("div");
-    instructionsDiv.className = "setup-instructions";
-    instructionsDiv.innerHTML = `
+      const instructionsDiv = document.createElement("div");
+      instructionsDiv.className = "setup-instructions";
+      instructionsDiv.innerHTML = `
       <h2>Place Your Ships</h2>
       <p>Drag each ship from the right panel to your board on the left. Use the "Rotate Ships" button to change orientation.</p>
     `;
 
-    const instructionsDivPanel = document.createElement("div");
-    instructionsDivPanel.className = "setup-instructions-panel";
-    instructionsDivPanel.innerHTML = `
+      const instructionsDivPanel = document.createElement("div");
+      instructionsDivPanel.className = "setup-instructions-panel";
+      instructionsDivPanel.innerHTML = `
       <details closed>
       <summary>Place Your Ships</summary>
       <p class="setup-instructions-panel-content">Drag each ship from the right panel to your board on the left. Use the "Rotate Ships" button to change orientation.</p>
@@ -784,21 +789,20 @@ export class DOMController {
     `;
       gameContainer.appendChild(instructionsDiv);
 
-    gameContainer.appendChild(instructionsDivPanel);
+      gameContainer.appendChild(instructionsDivPanel);
 
+      const boardsContainer = document.createElement("div");
+      boardsContainer.className = "boards-container";
 
-    const boardsContainer = document.createElement("div");
-    boardsContainer.className = "boards-container";
+      const playerBoardContainer = this.createEmptyGameBoard(false);
+      playerBoardContainer.id = "empty-player-board";
 
-    const playerBoardContainer = this.createEmptyGameBoard(false);
-    playerBoardContainer.id = "empty-player-board";
+      const shipBoardContainer = this.createEmptyGameBoard(true);
+      shipBoardContainer.id = "ship-container-board";
 
-    const shipBoardContainer = this.createEmptyGameBoard(true);
-    shipBoardContainer.id = "ship-container-board";
-
-    boardsContainer.appendChild(playerBoardContainer);
-    boardsContainer.appendChild(shipBoardContainer);
-    gameContainer.appendChild(boardsContainer);
+      boardsContainer.appendChild(playerBoardContainer);
+      boardsContainer.appendChild(shipBoardContainer);
+      gameContainer.appendChild(boardsContainer);
+    }
   }
-}
 }

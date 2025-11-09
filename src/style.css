@@ -218,7 +218,6 @@ button:active {
   line-height: 1.5;
 }
 
-
 .setup-instructions {
   text-align: center;
   margin: 20px 0;
@@ -227,7 +226,7 @@ button:active {
   border-radius: 10px;
 }
 
-.setup-instructions-panel{
+.setup-instructions-panel {
   display: none;
 }
 
@@ -318,39 +317,39 @@ button:active {
   opacity: 0.7;
 }
 
-.carrier .draggable-ship{
-  background-image: url('assets/images/carrier.svg');
+.carrier .draggable-ship {
+  background-image: url("assets/images/carrier.svg");
 }
 
 .carrier .draggable-ship.vertical {
   transform: rotate(90deg);
 }
 /*//here */
-.battleship .draggable-ship{
-  background-image: url('assets/images/battleship.svg');
+.battleship .draggable-ship {
+  background-image: url("assets/images/battleship.svg");
 }
 
 .battleship .draggable-ship.vertical {
   transform: rotate(90deg);
 }
-.destroyer .draggable-ship{
-  background-image: url('assets/images/destroyer.svg');
+.destroyer .draggable-ship {
+  background-image: url("assets/images/destroyer.svg");
 }
 
 .destroyer .draggable-ship.vertical {
   transform: rotate(90deg);
 }
 
-.cruiser .draggable-ship{
-  background-image: url('assets/images/cruiser.svg');
+.cruiser .draggable-ship {
+  background-image: url("assets/images/cruiser.svg");
 }
 
 .cruiser .draggable-ship.vertical {
   transform: rotate(90deg);
 }
 
-.submarine .draggable-ship{
-  background-image: url('assets/images/submarine.svg');
+.submarine .draggable-ship {
+  background-image: url("assets/images/submarine.svg");
 }
 
 .submarine .draggable-ship.vertical {
@@ -380,14 +379,14 @@ button:active {
 
 .highlight-valid {
   background: rgba(76, 175, 80, 0.7);
-  border-color: #4caf50 ;
+  border-color: #4caf50;
   transform: scale(1.1);
   z-index: 10;
   position: relative;
 }
 
 .highlight-invalid {
-  background: rgba(244, 67, 54, 0.7) ;
+  background: rgba(244, 67, 54, 0.7);
   border-color: #f44336;
   transform: scale(1.1);
   z-index: 10;
@@ -485,7 +484,7 @@ button:active {
   h1 {
     font-size: 2rem;
   }
-  
+
   .board-grid {
     grid-template-columns: repeat(10, 30px);
     grid-template-rows: repeat(10, 30px);
@@ -500,25 +499,25 @@ button:active {
     display: none;
   }
 
-  .setup-instructions-panel{
-  display: block;
-}
-.setup-instructions-panel-content{
-  text-align: center;
-  margin: 20px 0;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 10px;
-}
+  .setup-instructions-panel {
+    display: block;
+  }
+  .setup-instructions-panel-content {
+    text-align: center;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+  }
 
   .setup-instructions h2 {
     font-size: 1.5rem;
   }
 
   .ship-container {
-  grid-template-rows: 110px 110px; 
-  height: 300px;
-  width: 310px;
+    grid-template-rows: 110px 110px;
+    height: 300px;
+    width: 310px;
   }
 
   .container {
@@ -526,36 +525,34 @@ button:active {
     flex-direction: column;
   }
 
-  .container h1{
-  order: 1;
-} 
+  .container h1 {
+    order: 1;
+  }
 
-.game-status {
-  margin: 0 40px;
-}
+  .game-status {
+    margin: 0 40px;
+  }
 
-.instructions {
-  order: 2;
-}
+  .instructions {
+    order: 2;
+  }
 
-#game-container{
-  display: flex;
-  flex-direction: column;
-  order: 1;
-}
+  #game-container {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+  }
 
-#game-status{
-  order: 1;
-}
+  #game-status {
+    order: 1;
+  }
 
-.boards-container{
-  order: 2;
-}
-.game-controls{
-  order: 3;
-}
-
-
+  .boards-container {
+    order: 2;
+  }
+  .game-controls {
+    order: 3;
+  }
 }
 
 @media (max-width: 480px) {
@@ -573,115 +570,113 @@ button:active {
     flex-direction: column;
   }
 
-.container h1{
-  order: 1;
-  display: none;
-} 
+  .container h1 {
+    order: 1;
+    display: none;
+  }
 
-#svg-container {
-  top: 10px;
-  right: 10px;
-}
+  #svg-container {
+    top: 10px;
+    right: 10px;
+  }
 
-.instructions {
-  margin: 0;
-  order: 2;
-}
+  .instructions {
+    margin: 0;
+    order: 2;
+  }
 
-.setup-instructions {
-  display: none;
-}
+  .setup-instructions {
+    display: none;
+  }
 
-#game-container{
-  order: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
+  #game-container {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 
-#game-status{
-  order: -1;
-}
+  #game-status {
+    order: -1;
+  }
 
-.game-status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  margin: 0 30px;
-  padding: 10px;
-}
-
-.gameboard {
+  .game-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    margin: 0 30px;
     padding: 10px;
-}
-
-.gameboard h3 {
-  font-size: 1rem;
-  margin-bottom: 10px;
-}
-
-.board-grid {
-  grid-template-columns: repeat(10, 25px);
-  grid-template-rows: repeat(10, 25px);
-  gap: 2px;
-}
-
-.cell {
-  width: 25px;
-  height: 25px;
   }
 
-.ship-cell {
-  width: 23px;
-  height: 23px;
-}
-
-.orientation-btn {
-  padding: 8px 10px;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.start-game-btn {
-  padding: 12px 25px;
-  font-size: 16px;
-}
-
-.setup-instructions-panel{
-  display: block;
-}
-.setup-instructions-panel-content{
-  text-align: center;
-  margin: 20px 0;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.boards-container {
-  flex-direction: column;
-  margin-top: 10px;
-}
-
-.ship-container {
-  grid-template-rows: 100px 100px; 
-  height: 260px;
-  width: 260px;
+  .gameboard {
+    padding: 10px;
   }
 
-.game-status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  margin: 0 30px;
-  padding: 10px;
-}
+  .gameboard h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
 
-.game-controls{
-  order: 3;
-}
-}
+  .board-grid {
+    grid-template-columns: repeat(10, 25px);
+    grid-template-rows: repeat(10, 25px);
+    gap: 2px;
+  }
 
+  .cell {
+    width: 25px;
+    height: 25px;
+  }
 
+  .ship-cell {
+    width: 23px;
+    height: 23px;
+  }
+
+  .orientation-btn {
+    padding: 8px 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .start-game-btn {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+
+  .setup-instructions-panel {
+    display: block;
+  }
+  .setup-instructions-panel-content {
+    text-align: center;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .boards-container {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .ship-container {
+    grid-template-rows: 100px 100px;
+    height: 260px;
+    width: 260px;
+  }
+
+  .game-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    margin: 0 30px;
+    padding: 10px;
+  }
+
+  .game-controls {
+    order: 3;
+  }
+}
