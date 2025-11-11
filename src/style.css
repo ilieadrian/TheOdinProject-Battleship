@@ -680,3 +680,89 @@ button:active {
     order: 3;
   }
 }
+
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 35px);
+  grid-template-rows: repeat(10, 35px);
+  gap: 2px;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* Ship wrapper using absolute positioning */
+.ship-wrapper-grid {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none; /* Allow clicks to pass through to cells */
+  z-index: 5;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+/* Ship images by name */
+.ship-wrapper-grid.ship-carrier {
+  background-image: url('assets/images/carrier.svg');
+}
+
+.ship-wrapper-grid.ship-battleship {
+  background-image: url('assets/images/battleship.svg');
+}
+
+.ship-wrapper-grid.ship-cruiser {
+  background-image: url('assets/images/cruiser.svg');
+}
+
+.ship-wrapper-grid.ship-submarine {
+  background-image: url('assets/images/submarine.svg');
+}
+
+.ship-wrapper-grid.ship-destroyer {
+  background-image: url('assets/images/destroyer.svg');
+}
+
+/* Rotate vertical ships */
+.ship-wrapper-grid.vertical {
+  transform: rotate(90deg);
+}
+
+/* Sunk ship styling */
+.ship-wrapper-grid.sunk-ship {
+  opacity: 0.4;
+  filter: grayscale(100%) brightness(0.5);
+}
+
+/* Ensure cells don't cover ship wrappers when hit/miss */
+.cell.hit,
+.cell.miss,
+.cell.sunk {
+  z-index: 10;
+  position: relative;
+}
+
+/* Keep ship cells visible but less prominent */
+.cell.ship {
+  background: rgba(112, 128, 144, 0.3);
+  border-color: #2f4f4f;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .board-grid {
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+  }
+}
+
+@media (max-width: 480px) {
+  .board-grid {
+    grid-template-columns: repeat(10, 25px);
+    grid-template-rows: repeat(10, 25px);
+  }
+}

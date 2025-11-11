@@ -566,12 +566,56 @@ export class DOMController {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  renderGameboard(gameboard, container, showShips = false) {
-    const board = container.querySelector(".board-grid");
+  // renderGameboard(gameboard, container, showShips = false) {
+  //   const board = container.querySelector(".board-grid");
+  //   if (!board) return;
+
+  //   const cells = container.querySelectorAll(".cell");
+
+  //   cells.forEach((cell) => {
+  //     const x = parseInt(cell.dataset.x);
+  //     const y = parseInt(cell.dataset.y);
+
+  //     cell.className = "cell";
+
+  //     const ship = gameboard.getShipAt(x, y);
+  //     const hasBeenAttacked = gameboard.hasBeenAttacked(x, y);
+
+  //     if (hasBeenAttacked) {
+  //       if (ship) {
+  //         cell.classList.add("hit");
+  //         if (ship.isSunk()) {
+  //           cell.classList.add("sunk");
+  //         }
+  //       } else {
+  //         cell.classList.add("miss");
+  //       }
+  //     } else if (showShips && ship) {
+  //       cell.classList.add("ship");
+  //     }
+  //   });
+
+  //   if (showShips) {
+  //     const ships = gameboard.getShips();
+  //     ships.forEach((shipData) => {
+  //       console.log(shipData);
+  //       this.addShipClassesToCells(board, shipData);
+  //     });
+  //   }
+  // }
+
+   renderGameboard(gameboard, container, showShips = false) {
+    const board = container.querySelector('.board-grid');
     if (!board) return;
 
-    const cells = container.querySelectorAll(".cell");
+    // Clear existing ship wrappers
+    const existingShipWrappers = board.querySelectorAll('.ship-wrapper-grid');
+    existingShipWrappers.forEach(wrapper => wrapper.remove());
 
+    // Get all cells
+    const cells = board.querySelectorAll(".cell");
+
+    // Reset all cells
     cells.forEach((cell) => {
       const x = parseInt(cell.dataset.x);
       const y = parseInt(cell.dataset.y);
@@ -595,43 +639,90 @@ export class DOMController {
       }
     });
 
+    // Add ship wrapper divs if showing ships
     if (showShips) {
       const ships = gameboard.getShips();
       ships.forEach((shipData) => {
-        console.log(shipData);
-        this.addShipClassesToCells(board, shipData);
+        this.addShipWrapper(board, shipData);
       });
     }
   }
 
-  addShipClassesToCells(board, shipData) {
-    const { coordinates, isHorizontal } = shipData;
-    const name = shipData.ship.name;
-    console.log("addShipClassesToCells name", name)
 
+
+  addShipWrapper(board, shipData) {
+    const { ship, coordinates, isHorizontal } = shipData;
+      const name = shipData.ship.name;
+    
     if (!coordinates || coordinates.length === 0) return;
 
-    // Find starting cell (top-left corner)
-    const minY = Math.min(...coordinates.map((coord) => coord[0]));
-    const minX = Math.min(...coordinates.map((coord) => coord[1]));
+    // Find starting position (top-left corner)
+    const minY = Math.min(...coordinates.map(coord => coord[0]));
+    const minX = Math.min(...coordinates.map(coord => coord[1]));
+    const length = coordinates.length;
 
-    // Add classes to each cell
-    coordinates.forEach((coord, index) => {
-      const [y, x] = coord;
-      const cell = board.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+    // Create wrapper div
+    const shipWrapper = document.createElement('div');
+    shipWrapper.className = `ship-wrapper-grid ship-${name} ${isHorizontal ? 'horizontal' : 'vertical'}`;
+    
+    if (ship.isSunk()) {
+      shipWrapper.classList.add('sunk-ship');
+    }
 
-      if (cell) {
-        cell.classList.add(`ship-${name}`);
-        cell.classList.add(isHorizontal ? "ship-horizontal" : "ship-vertical");
+    // Get cell size from computed style
+    const firstCell = board.querySelector('.cell');
+    const cellSize = firstCell ? firstCell.offsetWidth : 35;
+    const gap = 2;
 
-        // Mark the starting cell
-        if (y === minY && x === minX) {
-          cell.classList.add("ship-start");
-          cell.dataset.shipLength = coordinates.length;
-        }
-      }
-    });
+    // Calculate position and size
+    const left = minX * (cellSize + gap);
+    const top = minY * (cellSize + gap);
+    
+    if (isHorizontal) {
+      shipWrapper.style.left = `${left}px`;
+      shipWrapper.style.top = `${top}px`;
+      shipWrapper.style.width = `${length * cellSize + (length - 1) * gap}px`;
+      shipWrapper.style.height = `${cellSize}px`;
+    } else {
+      shipWrapper.style.left = `${left}px`;
+      shipWrapper.style.top = `${top}px`;
+      shipWrapper.style.width = `${cellSize}px`;
+      shipWrapper.style.height = `${length * cellSize + (length - 1) * gap}px`;
+    }
+
+    board.appendChild(shipWrapper);
   }
+
+
+  // addShipClassesToCells(board, shipData) {
+  //   const { coordinates, isHorizontal } = shipData;
+  //   const name = shipData.ship.name;
+  //   console.log("addShipClassesToCells name", name)
+
+  //   if (!coordinates || coordinates.length === 0) return;
+
+  //   // Find starting cell (top-left corner)
+  //   const minY = Math.min(...coordinates.map((coord) => coord[0]));
+  //   const minX = Math.min(...coordinates.map((coord) => coord[1]));
+
+  //   // Add classes to each cell
+  //   coordinates.forEach((coord, index) => {
+  //     const [y, x] = coord;
+  //     const cell = board.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+  //     console.log("cell in coordinates", cell)
+
+  //     if (cell) {
+  //       cell.classList.add(`ship-${name}`);
+  //       cell.classList.add(isHorizontal ? "ship-horizontal" : "ship-vertical");
+
+  //       // Mark the starting cell
+  //       if (y === minY && x === minX) {
+  //         cell.classList.add("ship-start");
+  //         cell.dataset.shipLength = coordinates.length;
+  //       }
+  //     }
+  //   });
+  // }
 
   updateDisplay() {
     const playerBoard = document.getElementById("player-board");
